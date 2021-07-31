@@ -1,2 +1,2 @@
 # krazymood
-shero-shayri platform
+shero-shayri platform v1
