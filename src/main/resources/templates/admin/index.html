@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head  xmlns:th="http://www.thymeleaf.org">
+  	<title>krazymood-Admin Panel</title>
+  	<link rel = "icon" href ="/images/panda.png" type = "image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/admin_style.css">
+
+		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+		 <script>
+
+
+		 </script>
+
+		<script>
+        $(document).ready(function () {
+
+        	var language = 'hindi';
+        	var ctgory = " ";
+
+        	 $("#header").hide();
+        	tinymce.init({selector: '#txtarea',
+	            plugins: "codesample code lists advlist autolink autoresize charmap code emoticons hr image insertdatetime link media paste preview searchreplace table textpattern toc visualblocks visualchars wordcount quickbars",
+	            toolbar: "code codesample preview | undo redo | formatselect | fontselect | fontsizeselect | bold italic underline strikethrough backcolor forecolor | subscript superscript | numlist bullist | alignleft aligncenter alignright alignjustify | outdent indent | paste searchreplace | toc link image media charmap insertdatetime emoticons hr | table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | removeformat"
+
+	            	/*  setup: function (ed) {
+	                     ed.on('keyup', function (e) {
+	                         var count = CountCharacters();
+	                         document.getElementById("character_count").innerHTML = "Characters: " + count;
+	                     });
+	                 } */
+		 });
+
+		 /* function CountCharacters() {
+	            var body = tinymce.get("txtarea").getBody();
+	            var content = tinymce.trim(body.innerText || body.textContent);
+	            if(content.length==30){
+	            	alert(tinymce.activeEditor.selection.select(tinymce.activeEditor.dom.select('p')[0]));
+	            }
+
+	            return content.length;
+	        }; */
+
+	        $("#category2").change(function () {
+                $.ajax({
+                    url: "/admin/getsubcategories?category=" + $(this).val(), success: function (result) {
+
+                        var options = "<option value=' '>Please Select";
+                        for (i in result) {
+                            options += "<option value='" + result[i].id + "'>" + result[i].subCatName + "</option>";
+                        }
+                        // document.getElementById("subcategory").innerHTML=options;
+
+                        $("#subcategory2").html(options);
+                    }
+                });
+            });
+
+            $("#category").change(function () {
+                $.ajax({
+                    url: "/admin/getsubcategories?category=" + $(this).val(), success: function (result) {
+
+                        var options = "<option value=' '>Please Select";
+                        for (i in result) {
+                            options += "<option value='" + result[i].id + "'>" + result[i].subCatName + "</option>";
+                        }
+                        // document.getElementById("subcategory").innerHTML=options;
+
+                        $("#subcategory").html(options);
+                    }
+                });
+                language = $("#language").val();
+                ctgory = $("#category").val();
+                ctgryOrSubCtgry = 'category';
+                subctgory = 0;
+				getLegendsByCategoryAndLan(language,ctgory,subctgory,ctgryOrSubCtgry);
+            });
+
+
+	        $("#subcategory").change(function () {
+	        	language = $("#language").val();
+                ctgory = $("#category").val();
+                subctgory = $("#subcategory").val()==' '?'0':$("#subcategory").val();
+                ctgryOrSubCtgry = 'subctgory';
+				getLegendsByCategoryAndLan(language,ctgory,subctgory,ctgryOrSubCtgry);
+            });
+
+	        $("#language").change(function () {
+	        	language = $("#language").val();
+                ctgory = $("#category").val();
+                subctgory = $("#subcategory").val()==' '?'0':$("#subcategory").val();
+                ctgryOrSubCtgry = 'subctgory';
+
+				if(ctgory!=' ' && subctgory!=0){
+				getLegendsByCategoryAndLan(language,ctgory,subctgory,ctgryOrSubCtgry);
+				}else{
+					if(ctgory==' ')alert("Kindly select category");
+					else{alert("Kindly select sub category");}
+				}
+            });
+
+	        function getLegendsByCategoryAndLan(language,ctgory,subctgory,ctgryOrSubCtgry){
+	        	   $.ajax({
+	                    url: "/admin/getLegendsByCategoryAndLan?category=" + ctgory+"&language="+language+"&subctgory="+subctgory+"&ctgryOrSubCtgry="+ctgryOrSubCtgry, success: function (result) {
+
+	                        var options = "<option value='0' selected>Select Legends";
+	                        for (i in result) {
+	                            options += "<option value='" + result[i].id + "'>" + result[i].legendName + "</option>";
+	                        }
+	                        // document.getElementById("subcategory").innerHTML=options;
+
+	                        $("#legends").html(options);
+	                    }
+	                });
+	        }
+            /********/
+
+            $("#submit").click(function () {
+				var ctgry = $("#category option:selected").text();
+                var form = $('#file_form')[0];
+                var data = new FormData(form);
+
+                var original = tinymce.get("txtarea").getContent();
+				var edited = original;
+
+				edited = edited.trim().substring("<p>".length,edited.indexOf("</p>"));
+				var edt="";
+
+				if(edited.includes('<br />')){
+					arr = edited.split('<br />');
+					edited = arr[0].toString().split(" ");
+				}
+				else{
+					edited = edited.split(" ");
+				}
+
+				if(!(ctgry.includes("poems") || ctgry.includes("stories"))){
+					for (var i=0; i < (edited.length)/2; i++) {
+						edt+=edited[i]+" ";
+					}
+				}
+
+                $("#header").val(edt.toString().trim().replace(/\s+/g, "-"));
+				$("#header").show();
+
+                var jsonDataObj = {
+                    "categories": $("#category").val(),
+                    "subCategory": $("#subcategory").val(),
+                    "header": $("#header").val(),
+                    "engHeader": $("#engheader").val(),
+                    "language": $("#language").val(),
+                    "legendId":$("#legends").val(),
+                    "isSpecific":$("#isSpecific").val(),
+                    "userName":$("#userName").val(),
+                    "text": original
+                };
+
+                data.append("jsondata", JSON.stringify(jsonDataObj));
+
+                $("#btnSubmit").prop("disabled", true);
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "/admin/content",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+
+                        console.log("SUCCESS : ", data);
+                        $("#btnSubmit").prop("disabled", false);
+                        $("#response").html(data);
+                    },
+                    error: function (e) {
+                        console.log("ERROR : "+e);
+                        $("#btnSubmit").prop("disabled", false);
+                    }
+                });
+            });
+            /*****/
+
+			/*start save legend here*/
+			$("#saveLgnd").click(function () {
+				var form = $('#legendfile_form')[0];
+				var data = new FormData(form);
+
+				var jsonDataObj = {
+					"legendName": $("#lgndName").val(),
+					"language": $("#lang").val(),
+					"dob": $("#dob").val(),
+					"description": $("#description").val(),
+					"category": $("#category2").val(),
+					"subCategory": $("#subcategory2").val(),
+				};
+
+				data.append("jsondata", JSON.stringify(jsonDataObj));
+
+				$.ajax({
+					type: "POST",
+					enctype: 'multipart/form-data',
+					url: "/admin/savelegend",
+					data: data,
+					processData: false,
+					contentType: false,
+					cache: false,
+					success: function (data) {
+
+						console.log("SUCCESS : ", data);
+						$("#btnSubmit").prop("disabled", false);
+						$("#lgndresponse").html(data);
+					},
+					error: function (e) {
+						console.log("ERROR : "+e);
+						$("#btnSubmit").prop("disabled", false);
+					}
+				});
+			});
+
+			/*end of save legend here*/
+
+
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <script>
+    $(document).ready(function () {
+    	 $("#addcntntdiv").hide();
+    	 $("#addcatdiv").hide();
+    	 $("#addlegendsdiv").hide();
+    	 $("#dftldiv").show();
+
+    	 $("#addcategorylnk").click(function () {
+    		 $("#addcntntdiv").hide();
+    		 $("#dftldiv").hide();
+			 $("#addlegendsdiv").hide();
+    		 $("#addcatdiv").show();
+    	 });
+
+    	 $("#addcntntlnk").click(function () {
+    		 $("#dftldiv").hide();
+    		 $("#addcatdiv").hide();
+			 $("#addlegendsdiv").hide();
+    		 $("#addcntntdiv").show();
+    	 });
+
+    	 $("#addlegendslnk").click(function () {
+    		 $("#dftldiv").hide();
+    		 $("#addcatdiv").hide();
+    		 $("#addcntntdiv").hide();
+			 $("#addlegendsdiv").show();
+    	 });
+
+    });
+
+
+	setInterval(function(){
+		callNotification();
+	}, 3000);
+
+	function callNotification(){
+		$.ajax({
+			type: "GET",
+			enctype: 'multipart/form-data',
+			url: "/admin/getNotifications",
+			processData: false,
+			contentType: false,
+			cache: false,
+			success: function (data) {
+				if(data.length>0){
+
+					var res = "<table style='overflow-y:scroll;height:180px;display:block;'>";
+					for(var i=0; i<data.length; i++){
+						truncateText = (data[i].contents).substring(0,50);
+						res+="<tr><td><a href='/"+data[i].id +"'>"+ truncateText + "</a></td></tr>"
+					}
+					res+="</table>";
+					$("#notified").html(res);
+					$("#countOfNotifications").html(data.length);
+				}else{
+					$("#notified").html("<table><tr><td>There is no notifications</td></tr></table>");
+				}
+
+			},
+			error: function (e) {
+				$("#notified").html("<table><tr><td>There is no notifications</td></tr></table>");
+				console.log("ERROR : "+e);
+			}
+		});
+	}
+
+    </script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(../images/admin_logo.jpg);"></a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Contents</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#" id="addcntntlnk">Add Contents</a>
+                </li>
+                <li>
+                    <a href="#" >Your Contents</a>
+                </li>
+                <li>
+                    <a href="#">Manage Contents</a>
+                </li>
+	            </ul>
+	          </li>
+	          <li>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="#" id="addcategorylnk">Add Category</a>
+                </li>
+                <li>
+                    <a href="#">Add Sub-Category</a>
+                </li>
+				  <li>
+					  <a href="#" id="addlegendslnk">Add Legends</a>
+				  </li>
+              </ul>
+	          </li>
+	          <li>
+              <a href="#">Profile</a>
+	          </li>
+	          <li>
+              <a href="#">Contact</a>
+	          </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Bell <i id="countOfNotifications"></i> </a>
+					<div id="notified"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+
+<!-- statrt of textarea  box-shadow: 10px 10px 5px #888888;-->
+			<div class="maintxtarea">
+			<div id="dftldiv"><h1 class="text-center">Welcome to working section</h1></div>
+			
+				<div id="addcntntdiv">
+					<h4 class="text-center" style="color: #888888;">Write Content
+						Here</h4>
+					<div class="row textrow"
+						style="padding: 5px; width: 99.99%; margin: 0 auto;">
+						<div class="col-md-2">
+							<select class="form-control" id="category" name="categories"
+								required>
+								<option value=" ">Select Category</option>
+								<option th:value="${category.id}"
+									th:each="category: ${categories}" th:text="${category.title}"></option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-control" id="subcategory" name="subCategory"
+								required>
+								<option value="">Select Sub-Category</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-control" id="legends" name="legends"
+								required>
+								<option value="0" selected>Select Legends</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<select class="form-control" id="language" name="language"
+								required>
+								<option value="hindi" selected>Hindi</option>
+								<option value="nepali">Nepali</option>
+							</select>
+						</div>
+						<div class="col-md-3 custom-file">
+							<form id="file_form">
+								<input type="file" name="fileimage">
+							</form>
+						</div>
+						<div class="col-md-2">
+							<form>
+								<input class="form-control" type="text" id="engheader"
+									name="engHeader" placeholder="Write your content title here"
+									>
+							</form>
+						</div>
+						<div class="col-md-2">
+							<select class="form-control" id="isSpecific" name="isSpecific"
+								required>
+								<option value="false" selected>False</option>
+								<option value="true">True</option>
+							</select>
+						</div>
+						<div class="col-md-1">
+							<form>
+								<input class="form-control" type="text" id="header"
+									name="header" placeholder="Write your content title here"
+									readonly>
+							</form>
+						</div>
+
+						<div class="col-md-2">
+							<form>
+								<input class="form-control" type="text" id="userName"
+									   name="userName" value="Admin">
+							</form>
+						</div>
+
+					</div>
+
+					<div>
+						<textarea id="txtarea" name="text"></textarea>
+					</div>
+					<!-- <div id="character_count">Characters:</div> -->
+					<div class="text-center" style="padding: 10px;">
+						<input class="btns" type="button" id="submit" value="Publish">
+					</div>
+					<div id="response">For server results</div>
+				</div>
+				<!--End of content div  -->
+				
+				
+				<!--Start of category div  -->
+				<div id="addcatdiv" >
+					<form id="formcategory">
+					  <div class="field_wrapper">
+					  		<div class="form-group">
+									<select class="form-control" id="visibility" name="visibility"
+											required>
+										<option value="true" required>Yes</option>
+										<option value="false" >No</option>
+									</select>
+								</div>
+							<div class="form-group">
+								<label for="title">Add Category</label> <input
+									type="text" class="form-control" id="title" name="title"
+									aria-describedby="emailHelp" placeholder="Enter category name (like-Shayri)">
+							</div>
+							<div class="form-group" >
+								    <label for="subcategory">Add Sub-Category</label> <input
+									type="text" class="form-control" id="subcategory" name="subcategory[]"
+									placeholder="Enter sub-category name (like-love shayri)"> <a href="javascript:void(0);" class="add_button" title="Add field"> <img src="../images/add1600.png" style="width:30px; float:right;"/> </a>
+						  </div>
+					  </div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+
+				<!--Start of Legends Div-->
+
+				<div id="addlegendsdiv" >
+
+						<div class="lgnd_field_wrapper">
+							<div class="row">
+								<div class="col-md-3">
+									<select class="form-control" id="category2" name="category"
+											required>
+										<option value="">Select Category</option>
+										<option th:value="${category.id}"
+												th:each="category: ${categories}" th:text="${category.title}"></option>
+									</select>
+								</div>
+
+							<div class="col-md-3">
+								<select class="form-control" id="subcategory2" name="subCategory"
+									required>
+									<option value="">Select Sub-Category</option>
+								</select>
+							</div>
+
+							<div class="col-md-6">
+									<select class="form-control" id="lang" name="language"
+											required>
+										<option value="hindi" selected>Hindi</option>
+										<option value="nepali">Nepali</option>
+
+									</select>
+								</div>
+
+							</div>
+	                      <div class="row">
+							  <div class="form-group col-md-6">
+								  <input
+										  type="text" class="form-control" id="lgndName" name="legendName"
+										  aria-describedby="emailHelp" placeholder="Enter Legends name"> <!--<a href="javascript:void(0);" class="add_lgnd_button" title="Add field"> <img src="../images/add1600.png" style="width:30px; float:right;"/> </a>-->
+							  </div>
+							  
+							  <div class="col-md-3 custom-file">
+								  <form id="legendfile_form">
+									  <input type="file" name="profilePic">
+								  </form>
+							  </div>
+							  <div class="col-md-3">
+									  <input type="date" name="dob" id="dob">
+							  </div>
+						  </div>
+							<div class="row">
+								<textarea cols="23" rows="12" name="description" id="description"></textarea>
+							</div>
+
+
+						</div>
+						<button type="submit" class="btn btn-primary" id="saveLgnd">Save</button>
+						<div id="lgndresponse">For server results</div>
+
+				</div>
+				
+				
+			</div>
+			<!-- end of textarea  -->
+      
+      </div>
+  </div>
+ 		<script type="text/javascript" src="../js/custom.js"></script>
+  </body>
+</html>

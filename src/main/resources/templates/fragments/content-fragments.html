@@ -1,0 +1,318 @@
+<div th:fragment="poemandmisc" class="itr"
+	 th:if="${category == 'shero-shayari' &&  content.category.title != 'poems' &&  content.category.title != 'stories'}"
+	 th:each="content:${page.getContent()}" style="margin-top: 15px; padding:10px;"
+	 xmlns:th="http://www.w3.org/1999/xhtml">
+					<div   class="text-center" style="margin-bottom:2px;">
+						<h4 style="margin-bottom:-10px; text-transform: capitalize;">
+							<a
+								th:href="@{| /${content.subCategory.subCatName}/page/1|}"
+								th:utext="${@contentService.getHeader(content.subCategory.subCatName)}"></a>
+						</h4>
+						<h5 style="border-bottom:1px solid grey;">
+							<span>Posted By: [[${content.userName}]]</span> on <i th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMMM dd,yyyy')}"></i>
+						</h5>
+						<h4 id="rmhpn" class="text-left" style="padding:5px;" th:if="${content.category.title != 'memes'}">
+						    <a th:href="@{| /${content.engHeader}|}">
+									<i th:inline="text"> [[${@contentService.getHeader(content.header)}]].....</i>
+							</a>
+						</h4>
+					
+					</div>
+					
+					<!-- style="border-bottom:1px solid #F8F8F8; padding:10px;" -->
+					<div class="text-center">
+						<span> <img
+							th:src="@{'/storage/public_images/'+${content.imgname}}"
+							th:attr="title=${content.text}"
+							class="img img-responsive img-thumbnail">
+						</span>
+					</div>
+					<div>
+					<!--	<i class="fa fa-clock-o" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${#dates.format(content.updatedOn, 'MMMM dd,yyyy')}"></span>-->
+						<i class="fa fa-clock-o" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMMM dd,yyyy')}"></span>
+						<i style="display: inline-block; content: '\2022'; padding:0 7px;">  </i>  <i class="fa fa-eye" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${content.views}">23</span>
+					</div>
+					<div class="divdownImg">
+						<a th:href="@{'/storage/public_images/'+${content.imgname}}" th:download="${content.imgname}">
+						 <img src="/images/download.png" class="downImg" title="Download Image" />
+						</a>
+					</div>
+				    <div class=" text-center lead" style="margin-top:100px;">
+						<h4 th:utext="${content.text}" th:id="${'copyContent' + (content.id)}">Contents</h4>
+					</div> 
+					
+					<div class="row">
+					<div class="col-md-5 col-xs-3"></div>
+						<div class="col-md-3 col-xs-6 text-center">
+						  <img class="copyTxt" src="/images/copytxt.png" data-toggle="tooltip" width="35%" title="Copy text"  th:id="${'copyContent_' + (content.id)}" th:attr="data-my-func-attr=${content.id}" />
+						</div>
+					<div class="col-md-4 col-xs-3"></div>
+				</div>
+				
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3 col-xs-0"></div>
+						<div class="col-md-3 col-xs-6"> 
+							<a th:href="@{|tg://msg_url?url=https://krazyshayari.com/${content.engHeader}&amp;text=${@contentService.getStrippedContentforSocialSharing(content)}|}">
+						     	 <img src="/images/telegramshare.png" style="border-radius:10px;" width="100%"/>
+							</a> 
+						</div>
+						<div class="col-md-3 col-xs-6" style="text-align:left;">
+							 <a  th:href="@{|https://api.whatsapp.com/send?text=${@contentService.getStrippedContent(content)}|}" data-action="share/whatsapp/share">
+								 <img src="/images/whatsappshare.png" width="100%" />
+							 </a> 
+						</div>
+						<div class="col-md-3 col-xs-0"></div>
+					</div>
+					
+					<!-- <div>
+						<a th:href="@{|http://www.facebook.com/sharer.php?u=https://krazyshayari.com  /${content.engHeader}|}" target="_blank">
+							        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" title="Facebook" />
+							    </a>
+					</div> -->
+
+
+					<div class="cmntsnlikes" style="margin-top:30px;">
+						<ul>
+							<!-- <li><a href="#home"> <i class="fa fa-thumbs-o-up fa-2x"
+									aria-hidden="true"></i></a>
+							</li> -->
+							<li>
+							<div id="fb-root"> </div>
+							<script async defer crossorigin="anonymous"
+								src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0"
+								nonce="XR82RwUb"></script>
+								<div class="fb-like"
+								th:data-href="@{|https://www.krazyshayari.com/${content.engHeader}|}"
+								data-width="" data-layout="button_count" data-action="like"
+								data-size="large" data-share="true"></div>
+							</li>
+							<li><a
+								th:href="@{|/${content.engHeader}|}">
+									<i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+							</a></li>
+							<li><a href="#contact"> <i class="fa fa-share-alt fa-2x btn" data-toggle="modal" th:attr="data-target='#myModal'+${content.id}" 
+									aria-hidden="true"></i></a>
+							</li>
+						</ul>
+					</div>
+					
+								<!-- Modal -->
+  <div class="modal fade" th:id="'myModal'+${content.id}" role="dialog" style="margin-top:200px;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><i>Share with your friends</i></h4>
+        </div>
+        <div class="modal-body">
+				<!-- Facebook -->
+		    <a th:href="@{|http://www.facebook.com/sharer.php?u=https://krazyshayari.com/${content.engHeader}|}" target="_blank">
+		        <img src="/images/facebookround.png" title="Facebook" style="width:65px;"/>
+		    </a>
+		     <!-- Twitter -->
+		    <a th:href="@{|https://twitter.com/share?url=https://krazyshayari.com/${content.engHeader}&amp;text=${@contentService.getStrippedContentforSocialSharing(content)}|}" target="_blank">
+		        <img src="/images/twitterround.png" title="Twitter" style="width:65px;" />
+		       <!--   -->
+		    </a>
+		    
+		    <!-- LinkedIn -->
+		    <a th:href="@{|http://www.linkedin.com/shareArticle?mini=true&amp;url=https://krazyshayari.com/${content.engHeader}|}" target="_blank">
+		        <img src="/images/linkedinround.png" title="LinkedIn" style="width:65px;" />
+		    </a>
+		    <a th:href="@{|tg://msg_url?url=https://krazyshayari.com/${content.engHeader}&amp;text=${@contentService.getStrippedContentforSocialSharing(content)}|}">
+		        <img src="/images/telegramround.png" title="Telegram" style="width:65px;"/>
+		    </a>
+		    <a  th:href="@{|https://api.whatsapp.com/send?text=${@contentService.getStrippedContent(content)}|}" data-action="share/whatsapp/share">
+				 <img src="/images/whatsappround.png" style="width:65px;" />
+			 </a> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<!-- end of iterations move	 -->				
+</div>
+				
+				
+		<!-- Only for poems......... -->		
+				<div th:fragment="poems" class="itr" th:if="${category != 'shero-shayari' && content.category.title != null }" th:each="content:${page.getContent()}" style="margin-top: 15px; padding:10px;">
+					<div   class="text-center" style="margin-bottom:2px;">
+						<h4 style="margin-bottom:-10px; text-transform: capitalize;">
+							<a
+								th:href="@{|/${content.subCategory.subCatName}/page/1|}"
+								th:utext="${@contentService.getHeader(content.subCategory.subCatName)}"></a>
+						</h4>
+						<h5 style="border-bottom:1px solid grey;">
+							<span>Posted By: [[${content.userName}]]</span> on <i th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMMM dd,yyyy')}"></i>
+						</h5>
+						<h4 class="text-left" style="padding:5px;" th:if="${content.category.title != 'memes' && content.category.title != 'stories' && content.category.title != 'poems'}">
+						    <a th:href="@{|/${content.engHeader}|}">
+									<i th:inline="text"> [[${@contentService.getHeader(content.header)}]].....</i>
+							</a>
+						</h4>
+
+						<!--when poems story large content must have title or header in center-->
+						<h2 class="text-center" style="padding:5px;font-weight: bolder;" th:if="${content.category.title == 'stories' || content.category.title == 'poems'}">
+							<a th:href="@{| /${content.engHeader}|}">
+								<i th:inline="text"> [[${@contentService.getHeader(content.header)}]]</i>
+							</a>
+						</h2>
+					
+					</div>
+					
+					<!-- style="border-bottom:1px solid #F8F8F8; padding:10px;" -->
+					<div class="text-center">
+						<span> <img
+							th:src="@{'/storage/public_images/'+${content.imgname}}"
+							class="img img-responsive img-thumbnail">
+						</span>
+					</div>
+					
+					<div>
+
+						<!--<i class="fa fa-clock-o" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${#dates.format(content.updatedOn, 'MMMM dd,yyyy')}"></span>-->
+						<i class="fa fa-clock-o" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMMM dd,yyyy')}"></span>
+						<i style="display: inline-block; content: '\2022'; padding:0 7px;">  </i>  <i class="fa fa-eye" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${content.views}">23</span>
+					</div>
+					
+					<div class="divdownImg">
+						<a th:href="@{'/storage/public_images/'+${content.imgname}}" th:download="${content.imgname}">
+						 <img src="/images/download.png" class="downImg" title="Download Image" />
+						</a>
+					</div>
+					
+					<div class=" text-center lead" style="margin-top:100px;">
+						<h4 th:utext="${content.text}" th:id="${'copyContent' + (content.id)}">contents</h4>
+					</div>
+					
+					<div class="row">
+					<div class="col-md-5 col-xs-3"></div>
+						<div class="col-md-3 col-xs-6 text-center">
+						  <img class="copyTxt" src="/images/copytxt.png" data-toggle="tooltip" width="35%" title="Copy text"  th:id="${'copyContent_' + (content.id)}" th:attr="data-my-func-attr=${content.id}" />
+						</div>
+					<div class="col-md-4 col-xs-3"></div>
+				</div>
+				
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3 col-xs-0"></div>
+						<div class="col-md-3 col-xs-6"> 
+							<a th:href="@{|tg://msg_url?url=https://krazyshayari.com/${content.engHeader}&amp;text=${@contentService.getStrippedContentforSocialSharing(content)}|}">
+						     	 <img src="/images/telegramshare.png" style="border-radius:10px;" width="100%"/>
+							</a> 
+						</div>
+						<div class="col-md-3 col-xs-6" style="text-align:left;">
+							 <a  th:href="@{|https://api.whatsapp.com/send?text=${@contentService.getStrippedContent(content)}|}" data-action="share/whatsapp/share">
+								 <img src="/images/whatsappshare.png" width="100%" />
+							 </a> 
+						</div>
+						<div class="col-md-3 col-xs-0"></div>
+					</div>
+
+
+					<div class="cmntsnlikes" style="margin-top:30px;">
+						<ul>
+							<!-- <li><a href="#home"> <i class="fa fa-thumbs-o-up fa-2x"
+									aria-hidden="true"></i></a>
+							</li> -->
+							<li>
+								<div id="fb-root"> </div>
+								<script async defer crossorigin="anonymous"
+									src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0"
+									nonce="XR82RwUb"></script>
+									<div class="fb-like"
+									th:data-href="@{|https://www.krazyshayari.com/${content.engHeader}|}"
+									data-width="" data-layout="button_count" data-action="like"
+									data-size="large" data-share="true"></div>
+							</li>
+							<li><a
+								th:href="@{|/${content.engHeader}|}">
+									<i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+							</a></li>
+							<li><a href="#contact"> <i class="fa fa-share-alt fa-2x btn"
+									aria-hidden="true" data-toggle="modal" th:attr="data-target='#myModal'+${content.id}" ></i></a>
+							</li>
+						</ul>
+					</div>
+					
+					
+													<!-- Modal -->
+  <div class="modal fade" th:id="'myModal'+${content.id}" role="dialog" style="margin-top:200px;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><i>Share with your friends</i></h4>
+        </div>
+        <div class="modal-body">
+				<!-- Facebook -->
+		    <a th:href="@{|http://www.facebook.com/sharer.php?u=https:/krazyshayari.com  /${content.engHeader}|}" target="_blank">
+		        <img src="/images/facebookround.png" title="Facebook" style="width:65px;"/>
+		    </a>
+		     <!-- Twitter -->
+		    <a th:href="@{|https://twitter.com/share?url=https://krazyshayari.com  /${content.engHeader}&amp;text=${@contentService.getStrippedContentforSocialSharing(content)}|}" target="_blank">
+		        <img src="/images/twitterround.png" title="Twitter" style="width:65px;" />
+		       <!--   -->
+		    </a>
+		    
+		    <!-- LinkedIn -->
+		    <a th:href="@{|http://www.linkedin.com/shareArticle?mini=true&amp;url=https:/krazyshayari.com  /${content.engHeader}|}" target="_blank">
+		        <img src="/images/linkedinround.png" title="LinkedIn" style="width:65px;" />
+		    </a>
+		    <a th:href="@{|tg://msg_url?url=https://krazyshayari.com /${content.engHeader}&amp;text=${@contentService.getStrippedContentforSocialSharing(content)}|}">
+		        <img src="/images/telegramround.png" title="Telegram" style="width:65px;"/>
+		    </a>
+		    <a  th:href="@{|https://api.whatsapp.com/send?text=${@contentService.getStrippedContent(content)}|}" data-action="share/whatsapp/share">
+				 <img src="/images/whatsappround.png" style="width:65px;" />
+			 </a> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+					
+					<!-- end of iteration of poems -->
+				</div>
+
+
+					<!--table fragments-->
+
+						<div th:fragment="tablesofctgry" style="height:500px; overflow: scroll;">
+							<table class="table">
+								<thead>
+								<tr>
+									<th scope="col">Category</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="category: ${@contentService.getCategory()}">
+									<td scope="row" th:inline="text" class="text-center">
+										<a th:href="@{| /${category.title}/page/${1}|}"><i style="text-transform: capitalize;">[[${category.title}]]</i></a>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<table class="table">
+								<thead>
+								<tr>
+									<th scope="col">Sub Category</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="subcategory: ${@contentService.getSubCategory()}">
+									<td scope="row" th:inline="text" class="text-center">
+										<a th:href="@{|${subcategory.subCatName}/page/${1}|}"><i style="text-transform: capitalize;">>[[${@contentService.getHeader(subcategory.subCatName)}]]</i></a>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
