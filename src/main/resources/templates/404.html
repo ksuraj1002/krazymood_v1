@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/script_fragments::scriptsandstyles"></head>
+<style>
+	div.itr{
+		-webkit-box-shadow: 0px 0px 7px 3px rgba(72,72,74,1);
+-moz-box-shadow: 0px 0px 7px 3px rgba(72,72,74,1);
+box-shadow: 0px 0px 7px 3px rgba(72,72,74,1);
+border-radius:10px;
+	}
+	
+	div.navigationIcon{
+		-webkit-box-shadow: 0px 3px 5px 3px rgba(224,220,224,1);
+-moz-box-shadow: 0px 3px 5px 3px rgba(224,220,224,1);
+box-shadow: 0px 3px 5px 3px rgba(224,220,224,1);
+
+margin-top:10px;
+margin:10 auto;
+padding:20px;
+border-radius:10px;
+	}	
+</style>
+
+<script>
+	$("document").ready(function(){
+		 $('[data-toggle="tooltip"]').tooltip();   
+		$("#number").keyup(function(event){
+			if((event.keyCode != 26) || (event.keyCode !=27)){
+				
+				//$("input").css("background-color", "pink");
+				  var pageNum = $("#number").val();
+				 if(pageNum===0){
+					 pageNum='';
+				 }
+				  var href = $('#hrf').prop('href');
+				  if (event.keyCode == 8 || event.keyCode == 46) {
+					  href = href.substring(0,href.lastIndexOf("/")+1);
+					  href = href+pageNum;
+					 // alert("inside if con"+href+pageNum);
+					}else{ 
+						if(pageNum!=''){
+						pageNum = pageNum%10;	
+						}
+						href= $('#hrf').prop('href')+pageNum
+					}
+				  
+				   $("#hrf").attr("href", href); 
+				   // alert(href);
+				
+			}
+			   
+			});
+		
+		 
+		
+		
+		
+	});
+</script>
+
+<body>
+
+	<!--<div class="body-inner">
+		<div th:replace="fragments/navigation::topnav"></div>
+		<div th:replace="fragments/navigation::mainnav"></div>
+		
+		<div class="row" style="text-align:center;margin-top:10px;">
+			<img src="/images/404.jpg" class="img img-responsive" />
+		</div>
+		
+		
+		 <footer id="footer" class="footer bg-overlay" style="margin-top:100px;">
+      
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="copyright-info">
+                            <span>Copyright � 2020 <a th:if="${lan=='hindi'}" th:href="@{| / |}">krazyshayari.com</a></span>
+                            <span th:if="${lan=='nepali'}">Copyright � 2020 <a th:if="${lan=='nepali'}"  th:href="@{|   |}">krazyshayari.com</a></span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="footer-menu">
+                            <ul class="nav unstyled">
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#" data-toggle="modal"  data-target="#sendPost">Send your post</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>&lt;!&ndash; Row end &ndash;&gt;
+
+                <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
+                    <button class="btn btn-primary" title="Back to Top">
+                        <i class="fa fa-angle-double-up"></i>
+                    </button>
+                </div>
+
+            </div>&lt;!&ndash; Container end &ndash;&gt;
+        </div>&lt;!&ndash; Copyright end &ndash;&gt;
+
+    </footer>&lt;!&ndash; Footer end &ndash;&gt;
+    
+    <div th:replace="fragments/script_fragments::scripts"></div>
+		
+ </div>
+ 
+ <div th:replace="index1::sendthePost"></div>-->
+ 
+</body>
+</html>

@@ -21,7 +21,7 @@ public class Category {
 	public String title;
 	public boolean visibility;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category",fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category",fetch = FetchType.EAGER)
 	//@JsonIgnore
 	public Set<SubCategory> subCategory;
 	
@@ -39,8 +39,12 @@ public class Category {
 		this.title = title;
 		this.visibility = visibility;
 	}
-	
-	public int getId() {
+
+    public Category(Integer categoryId) {
+		this.id=categoryId;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

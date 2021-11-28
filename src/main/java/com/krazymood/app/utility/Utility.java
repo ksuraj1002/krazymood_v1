@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import com.krazymood.app.entities.Contents;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -76,11 +77,8 @@ public class Utility {
 	}
 
     public static boolean compareDatesforLatest(String date1,LocalDateTime dateTime) throws ParseException{
-		if(dateTime.plusDays(7).isAfter(LocalDateTime.now())){
-			return true;
-		}
-		return false;
-	}
+        return dateTime.plusDays(7).isAfter(LocalDateTime.now());
+    }
 
 	public static String sitemapDateTime(LocalDateTime dateTime) {
 		String dateStr = null;
@@ -101,5 +99,27 @@ public class Utility {
 		}
 		return dateStr;
 	}
-  
+
+	public static String contractLength(String string,String textType) {
+		string = string.replaceAll("\\<.*?\\>", "").replaceAll("&nbsp;"," ").replace("\r\n"," ").replace("\n"," ");
+		String[] strArr =string.split(" ");
+		StringBuilder str=new StringBuilder();
+		if(textType.equalsIgnoreCase("shortText")){
+			if(strArr.length>20){
+				for(int i=0; i<20; i++){
+					str.append(strArr[i]).append(" ");
+				}
+			}else{
+				for(int i=0; i<12; i++){
+					str.append(strArr[i]).append(" ");
+				}
+			}
+		}else if(textType.equalsIgnoreCase("longText")){
+			for(int i=0; i<40; i++){
+				str.append(strArr[i]).append(" ");
+			}
+		}
+		return str.toString().trim().concat("....");
+	}
+
 }

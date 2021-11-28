@@ -37,7 +37,12 @@ public class SubCategory {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getId() {
+
+    public SubCategory(Integer subCategoryId) {
+		this.id=subCategoryId;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

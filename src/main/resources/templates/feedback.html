@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Unlimited Shero Shayari | Poetry | Quotes | Dohe | Whatsapp Status | Two line status | Suvichar | Greetings</title>
+    <meta name="keywords"
+          content="shayari,love shayari,hate shayari,nafrat shayari,attitude shayari,dard shayari,pyar bhari shayari,dosti shayari,mohabbat shayari,new shayari 2021,
+		  			dushmani shayari,gulzar shayari,romantic shayari,judai shayari,bewafa shayari,
+		  			poems, bahaduri poems,fun poems, kids poem, bachho ki kavita, quotes,  life quotes, love quotes,inspirational quotes, smile quotes,positive quotes, motivational quotes, attitude quotes, beauty quotes, teacher quotes,
+		  			dohe,kabir ke dohe, tulsidas ke dohe, whatsapp status, whatsapp love status, whatsapp hate status,whatsapp life status, whatsapp attitude status,two line staus,two line love status, two line attitude status,bewafa two line status, bewafa status, two line ishq status,two line ishk status ,judai status,judai whastapp status
+
+	"/>
+    <meta name="description"
+          content="Love-Shayari, Hate-Shayari, Attitude Shayari, Dard-Shayari,Romantic Shayari, Peoms, Life Quotes, Kabir ke dohe, Tulsidas ke done, Whatsapp love status, Whatsapp hate status, Whatsapp Attitude status "/>
+
+    <link rel = "icon" href ="/images/krazylogos.png" type = "image/x-icon" sizes="296x296">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" data-th-attr="content=${@utilityService.getStrippedContentforSocialSharing(content)}" >
+    <meta property="og:type" content="article" />
+    <meta property="og:image" data-th-attr="content=@{'/storage/public_images/'+${content.imgname}}" />
+    <meta property="og:url" data-th-attr="content=@{|https://www.krazyshayari.com  /${content.engHeader}|}" />
+    <meta property="og:description" content="krazyshayari.com--Shero shayris, poems,quotes,dohe and much more" />
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet">
+    <link type="text/css" rel="stylesheet"
+          href="css/A.bootstrap.min.css%2bfont-awesome.min.css%2bstyle.css%2cMcc._DTUmYfu2G.css.pagespeed.cf.bi1dhJdCdr.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+</head>
+<body>
+
+<header id="header">
+
+    <div id="nav">
+
+        <div id="nav-fixed">
+            <div class="container">
+
+                <div class="nav-logo">
+                    <a href="/" class="logo"><img src="img/logo.png" alt=""></a>
+                </div>
+
+
+                <ul class="nav-menu nav navbar-nav">
+                    <li class="cat-2"><a href="/">Home</a></li>
+                    <li class="cat-4" th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
+                        <a  th:inline="text">
+                            [[${category.title}]]
+                        </a>
+                    </li>
+                </ul>
+
+
+                <div class="nav-btns">
+                    <button class="aside-btn"><i class="fa fa-bars"></i></button>
+                    <button class="search-btn"><i class="fa fa-search"></i></button>
+                    <div class="search-form">
+                        <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+                        <button class="search-close"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="nav-aside">
+
+            <div class="section-row">
+                <ul class="nav-aside-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Join Us</a></li>
+                    <li><a href="#">Advertisement</a></li>
+                    <li><a href="contact.html">Contacts</a></li>
+                </ul>
+            </div>
+
+
+            <div class="section-row">
+                <h3>Recent Posts</h3>
+                <div class="post post-widget">
+                    <a class="post-img" href="blog-post.html"><img src="img/xwidget-2.jpg.pagespeed.ic.183VIkUWUH.jpg"
+                                                                   alt=""></a>
+                    <div class="post-body">
+                        <h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design
+                            Mockup Into Code Automatically</a></h3>
+                    </div>
+                </div>
+                <div class="post post-widget">
+                    <a class="post-img" href="blog-post.html"><img src="img/xwidget-3.jpg.pagespeed.ic.NkT9v3Xk_w.jpg"
+                                                                   alt=""></a>
+                    <div class="post-body">
+                        <h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend
+                            Development Block!</a></h3>
+                    </div>
+                </div>
+                <div class="post post-widget">
+                    <a class="post-img" href="blog-post.html"><img src="img/xwidget-4.jpg.pagespeed.ic.KoyoxijWdu.jpg"
+                                                                   alt=""></a>
+                    <div class="post-body">
+                        <h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development
+                            Tools</a></h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section-row">
+                <h3>Follow us</h3>
+                <ul class="nav-aside-social">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                </ul>
+            </div>
+
+
+            <button class="nav-aside-close"><i class="fa fa-times"></i></button>
+
+        </div>
+
+    </div>
+
+
+    <div id="post-header" class="page-header">
+        <div class="background-img" style="background-image: url('img/post-page.jpg');"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="post-meta">
+                        <a class="post-category cat-2" href="category.html">JavaScript</a>
+                        <span class="post-date">March 27, 2018</span>
+                    </div>
+                    <h1>Ask HN: Does Anybody Still Use JQuery?</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="section-row sticky-container">
+                    <div class="main-post">
+                        <h3 style="text-transform: capitalize;text-decoration: underline;">
+                            <a th:href="@{|/${content.subCategory.subCatName}/page/1|}" th:utext="${getHeader}"
+                                th:with="getHeader=${T(com.krazymood.app.utility.Utility).getHeader(content.subCategory.subCatName)}">
+
+                            </a>
+                        </h3>
+                        <figure class="figure-img">
+                            <img class="img-responsive" th:src="@{'/storage/public_images/'+${content.imgname}}" th:attr="title=${content.text}">
+                            <figcaption>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMMM dd,yyyy')}"></span>
+                                <i style="display: inline-block; content: '\2022'; padding:0 7px;">  </i>  <i class="fa fa-eye" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${content.views}">23</span>
+                            </figcaption>
+                        </figure>
+                        <figure class="divdownImg">
+                            <a th:href="@{'/storage/public_images/'+${content.imgname}}" th:download="${content.imgname}">
+                                <img src="img/download.png" class="downImg" title="Download Image" />
+                            </a>
+                        </figure>
+                         <p th:utext="${content.text}" th:id="${'copyContent' + (content.id)}"></p>
+                        <figure class="divdownImg">
+                            <img src="img/copytxt.png" data-toggle="tooltip" style="height: 20%; width: 10%;" title="Copy text" th:id="${'copyContent_' + (content.id)}" th:attr="data-my-func-attr=${content.id}" />
+                        </figure>
+                    </div>
+
+                   <!-- <div class="post-shares sticky-shares">
+                        <a href="#" class="share-facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="share-twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="share-google-plus"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
+                        <a href="#" class="share-linkedin"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>-->
+                </div>
+
+
+                <div class="section-row">
+                    <div class="post-author">
+                        <div class="media">
+                            <!--<div class="media-left">
+                                <img class="media-object" src="img/author.png" alt="">
+                            </div>-->
+                            <div class="media-body">
+                                <div class="media-heading text-center">
+                                    <h3>
+                                        <a th:href="@{|tg://msg_url?url=https://krazyshayari.com/${content.engHeader}&amp;text=${@utilityService.getStrippedContentforSocialSharing(content)}|}">
+                                            <img src="img/telegramshare.png" style="border-radius:10px;" width="30%"/>
+                                        </a>
+                                        <a  th:href="@{|https://api.whatsapp.com/send?text=${@utilityService.getStrippedContentforSocialSharing(content)}|}" data-action="share/whatsapp/share">
+                                            <img src="img/whatsappshare.png" width="30%" />
+                                        </a>
+                                    </h3>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <ul class="author-social">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="section-row">
+                    <div class="post-comments">
+                        <div class="media">
+                            <div class="media-body">
+                                <div id="fb-root"></div>
+                                <script async defer crossorigin="anonymous"
+                                        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0"
+                                        nonce="HJLWHc3q"></script>
+                                <div class="fb-comments"
+                                     th:data-href="@{|https://www.krazyshayari.com/${content.engHeader}|}"
+                                     data-numposts="5" data-width=""></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="section-row">
+                    <div class="section-title">
+                        <h2>Leave a reply</h2>
+                        <p>your email address will not be published. required fields are marked *</p>
+                    </div>
+                    <form class="post-reply">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span>Name *</span>
+                                    <input class="input" type="text" name="name">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span>Email *</span>
+                                    <input class="input" type="email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span>Website</span>
+                                    <input class="input" type="text" name="website">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="input" name="message" placeholder="Message"></textarea>
+                                </div>
+                                <button class="primary-button">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="aside-widget" >
+                        <h3><u>Most Viewed Contents</u></h3>
+                    <div style="overflow-y:scroll;height:480px;">
+                        <div class="post post-widget" th:if="${content.views != 0}"  th:each="content:${mostViewedList}">
+                            <div class="post-img">
+                                <a  th:href="@{|/${content.engHeader}|}">
+                                    <img th:src="@{'/storage/public_images/'+${content.imgname}}">
+                                </a>
+
+                                <span style="font-size: 12px;"><i class="fa fa-clock-o" aria-hidden="true"></i> <span th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMM dd,yyyy')}"></span></span>
+                                <span style="font-size: 8px;"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
+                                <span style="font-size: 12px; padding:0 3px;"><i class="fa fa-eye" aria-hidden="true"></i> <span th:text="${content.views}">23</span></span>
+                            </div>
+                            <div class="post-body">
+                                <a th:href="@{|/${content.engHeader}|}">
+                                    <p th:utext="${getText}" th:with="getText=${T(com.krazymood.app.utility.Utility).contractLength(content.text,'shortText')}">Landed<p>
+                                    <!--  <p th:utext="${T(com.krazymood.app.utility.Utility).lengthContra('mostviewed','mostViewed')}">Landed<p>  -->
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Featured Posts</h2>
+                    </div>
+                    <div class="post post-thumb">
+                        <a class="post-img" href="blog-post.html"><img src="img/xpost-2.jpg.pagespeed.ic.TYs1GPrTN5.jpg"
+                                                                       alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <a class="post-category cat-3" href="#">Jquery</a>
+                                <span class="post-date">March 27, 2018</span>
+                            </div>
+                            <h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="post post-thumb">
+                        <a class="post-img" href="blog-post.html"><img src="img/xpost-1.jpg.pagespeed.ic.A4Rpahx6U5.jpg"
+                                                                       alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <a class="post-category cat-2" href="#">JavaScript</a>
+                                <span class="post-date">March 27, 2018</span>
+                            </div>
+                            <h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against
+                                JavaScript-Based CPU Side-Channel Attacks</a></h3>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Catagories</h2>
+                    </div>
+                    <div class="category-widget">
+                        <ul style="text-transform: capitalize;text-decoration: underline;">
+                            <li th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
+                                <a class="cat-3" th:inline="text">[[${category.title}]]<span>340</span></a>
+                            </li>
+                           <!-- <li><a href="#" class="cat-2">JavaScript<span>74</span></a></li>
+                            <li><a href="#" class="cat-4">JQuery<span>41</span></a></li>
+                            <li><a href="#" class="cat-3">CSS<span>35</span></a></li>-->
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="aside-widget">
+                    <div class="tags-widget">
+                        <ul>
+                            <li><a href="#">Chrome</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li><a href="#">Tutorial</a></li>
+                            <li><a href="#">Backend</a></li>
+                            <li><a href="#">JQuery</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">Website</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Archive</h2>
+                    </div>
+                    <div class="archive-widget">
+                        <ul>
+                            <li><a href="#">January 2018</a></li>
+                            <li><a href="#">Febuary 2018</a></li>
+                            <li><a href="#">March 2018</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="footer-widget">
+                    <div class="footer-logo">
+                        <a href="index.html" class="logo"><img src="img/xlogo.png.pagespeed.ic.s-UgktC5Y3.png"
+                                                               alt=""></a>
+                    </div>
+                    <ul class="footer-nav">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Advertisement</a></li>
+                    </ul>
+                    <div class="footer-copyright">
+<span>&copy; 
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com/"
+                                                                target="_blank">Colorlib</a>
+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="footer-title">About Us</h3>
+                            <ul class="footer-links">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="#">Join Us</a></li>
+                                <li><a href="contact.html">Contacts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="footer-title">Catagories</h3>
+                            <ul class="footer-links">
+                                <li><a href="category.html">Web Design</a></li>
+                                <li><a href="category.html">JavaScript</a></li>
+                                <li><a href="category.html">Css</a></li>
+                                <li><a href="category.html">Jquery</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="footer-widget">
+                    <h3 class="footer-title">Join our Newsletter</h3>
+                    <div class="footer-newsletter">
+                        <form>
+                            <input class="input" type="email" name="newsletter" placeholder="Enter your email">
+                            <button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                    <ul class="footer-social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js%2bmain.js.pagespeed.jc.XwDhaBFLFp.js"></script>
+<script>eval(mod_pagespeed_15hy7ra_pu);</script>
+<script>eval(mod_pagespeed_RDDE5qW6SI);</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer src="../../../static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"rayId":"6697ecde0e3e1b98","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/webmag/blog-post.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Jul 2021 11:13:50 GMT -->
+</html>

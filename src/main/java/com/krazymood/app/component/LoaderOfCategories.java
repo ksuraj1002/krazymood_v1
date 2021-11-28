@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.krazymood.app.services.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +13,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.krazymood.app.repository.CategoryRepository;
-import com.krazymood.app.repository.SubCategoryRepository;
-
 @Component
 public class LoaderOfCategories implements ApplicationListener<ContextRefreshedEvent> {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(Category.class);
-
-	@Autowired
-	CategoryRepository categoryRepository;
-	@Autowired
-	SubCategoryRepository subCategoryRepository;
+	@Autowired AdminService adminService;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -176,8 +170,8 @@ public class LoaderOfCategories implements ApplicationListener<ContextRefreshedE
 		categories.add(couplets);
 		categories.add(memes);
 		categories.add(quotes);
-		
-		if(categoryRepository.findAll().isEmpty())categoryRepository.saveAll(categories);
+		adminService.saveCategoriesOnload(categories);
+
 
 	}
 

@@ -1,14 +1,10 @@
 package com.krazymood.app.entities;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krazymood.app.component.Category;
 import com.krazymood.app.component.SubCategory;
-import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @Entity
@@ -47,21 +43,44 @@ public class Contents {
 	public long views;
 	
 	public boolean isSpecific;
-	
-	@ManyToOne
-	public Legends legends;
 
 	@Transient
 	public long legendId;
 
+	@Transient Integer categoryId,subCategoryId,pageNum;
+	@Transient String isSpecificStr,tempCategoryName;
+
 	private LocalDateTime createdOn = LocalDateTime.now();
 	private LocalDateTime updatedOn = LocalDateTime.now();
+
+	public boolean isSpecific() {
+		return isSpecific;
+	}
+
+	public String getTempCategoryName() {
+		return tempCategoryName;
+	}
+
+	public void setTempCategoryName(String tempCategoryName) {
+		this.tempCategoryName = tempCategoryName;
+	}
+
+
 
 	@PrePersist
 	public void setCreationspot(){
 		this.createdOn = LocalDateTime.now();
 		this.updatedOn = LocalDateTime.now();
 	}
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
 	@PreUpdate
 	public void setUpationspot(){
 		this.updatedOn = LocalDateTime.now();
@@ -70,6 +89,14 @@ public class Contents {
 
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
+	}
+
+	public String getIsSpecificStr() {
+		return isSpecificStr;
+	}
+
+	public void setIsSpecificStr(String isSpecificStr) {
+		this.isSpecificStr = isSpecificStr;
 	}
 
 	public void setCreatedOn(LocalDateTime createdOn) {
@@ -87,20 +114,6 @@ public class Contents {
 	public Contents() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Contents(String userName,String text,String header, long txtLngth, Category category, SubCategory subCategory,String language,String imgname, Legends legends,String engHeader,boolean isSpecific) {
-		this.userName=userName;
-		this.text = text;
-		this.txtLngth = txtLngth;
-		this.category = category;
-		this.subCategory = subCategory;
-		this.imgname = imgname;
-		this.header = header;
-		this.language = language;
-		this.legends = legends;
-		this.engHeader=engHeader;
-		this.isSpecific=isSpecific;
 	}
 	
 	public Contents(long id,String imgname,String text,String engHeader,String header, Category category,SubCategory subCategory,long views) {
@@ -179,14 +192,6 @@ public class Contents {
 	}
 
 
-	public Legends getLegends() {
-		return legends;
-	}
-
-	public void setLegends(Legends legends) {
-		this.legends = legends;
-	}
-
 	public long getLegendId() {
 		return legendId;
 	}
@@ -211,7 +216,7 @@ public class Contents {
 		this.views = views;
 	}
 
-	public boolean isSpecific() {
+	public boolean isSpecific(boolean b) {
 		return isSpecific;
 	}
 
@@ -225,6 +230,22 @@ public class Contents {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Integer getSubCategoryId() {
+		return subCategoryId;
+	}
+
+	public void setSubCategoryId(Integer subCategoryId) {
+		this.subCategoryId = subCategoryId;
 	}
 
 	@Override
@@ -241,7 +262,6 @@ public class Contents {
 				", engHeader='" + engHeader + '\'' +
 				", views=" + views +
 				", isSpecific=" + isSpecific +
-				", legends=" + legends +
 				", legendId=" + legendId +
 				'}';
 	}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/script_fragments::scriptsandstyles"></head>
+<body>
+<div class="body-inner">
+
+    <div th:replace="fragments/navigation::topnav"></div>
+    <div th:replace="fragments/navigation::mainnav"></div>
+
+    <div th:if="${readmsg}" th:fragment="redirectmsg">
+        <div th:class="${alertClass}">
+            <a href="#" class="close" data-dismiss="alert"
+               area-label="close">&times;</a>
+            <b th:text="${readmsg}">You are registered
+                successfully, please login.</b>
+        </div>
+    </div>
+
+    <div style="text-align: center"><h1>Privacy Policy</h1></div>
+    <div class="jumbotron jumbotron-fluid" style="color: #0d0d0d;text-align:justify-all; font-family:Poppins, Arial, sans-serif;">
+        <div class="container">
+            <p><h2>General Information</h2></p>
+            <p style="text-indent: 150px;">
+                The core intention of this site is to deliver the latest and trending greetings, shayari, quotes and status among their
+                loving/ liked one. This site is a way to deliver the emotions and feelings to other one.
+            </p>
+            <p><h2>Information we gather</h2></p>
+            <p style="text-indent: 50px;">
+                We may gather your information such as your Mail ID and Name only. We gather these information only when you share your
+                contents/ thoughts with us. The intention behind to gather these information is only to know the people who is sharing
+                and what is being shared. This would be very helpful to make the site very realistic and genuine.
+            </p>
+
+            <p><h2>Privacy Policy</h2></p>
+            <p style="text-indent: 50px;">
+                We allow third-party advertising company to serve ads when readers visit our site. Don't worry this site won't
+                take any personal information from you. This may keep track of your visiting to this site and show you ads on your
+                latest interest of goods and services.
+            </p>
+
+            <p><h2>Protection of your information</h2></p>
+            <p style="text-indent: 50px;">
+                We are liable to protect or keep secret of information (email and name) provided by you. We will never use your information for any commercial benefits.
+                Even we will not share any contents to you without your consent. Your consent is priority for us.
+            </p>
+
+
+
+            <p><h2>Copyright Holder</h2></p>
+            <p style="text-indent: 50px;">
+                This sites contents are strictly prohibited for commercial use. We allow our user to share contents available on this site in personal level only.
+                Neither we do nor we want such kind of activity.
+
+                We are not responsible for the content shared/ submitted by the user. If you find the violation of copyright.
+                Please feel free to contact/ inform us. We will definitely remove all those contents from our site.
+            </p>
+
+            <p><h2>Your consents</h2></p>
+            <p style="text-indent: 50px;">
+                By visiting our site, you are agree with the policy of our site. If this policy is against of your valuable data so please don't use this site.
+                Your consistent visiting to this site deemed your acceptance of all policy.
+            </p>
+
+            <p><h2>Disclaimer</h2></p>
+            <p style="text-indent: 50px;">
+                The contents in this site would be unique and maintains the good quality. Yet it happened in any way against of policy, so
+                that would only be a co-incident. By this site we are bound to share loves, a good thoughts and status to tell your
+                feeling among your people.
+                <div>
+                    <h4>Variation</h4>
+                    <p>krazyshayari.com can make any kind of variation at any time according to need.</p>
+                    <p>Updated On <i>10-July-2021</i></p>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer bg-overlay" style="margin-top:100px;">
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="copyright-info">
+                            <span>Copyright � 2020 <a th:href="@{| / |}">krazyshayari.com</a></span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="footer-menu">
+                            <ul class="nav unstyled">
+                                <li><a href="https://www.krazyshayari.com/about-us">About Us</a></li>
+                                <li><a href="https://www.krazyshayari.com/contact-us">Contact Us</a></li>
+                                <li><a href="https://www.krazyshayari.com/privacy-policy">Privacy Policy</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#sendPost">Send your post</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- Row end -->
+
+                <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
+                    <button class="btn btn-primary" title="Back to Top">
+                        <i class="fa fa-angle-double-up"></i>
+                    </button>
+                </div>
+
+            </div><!-- Container end -->
+        </div><!-- Copyright end -->
+
+    </footer><!-- Footer end -->
+
+
+    <div th:replace="fragments/script_fragments::scripts"></div>
+
+</div>
+<div th:replace="index1::sendthePost"></div>
+</body>
+</html>

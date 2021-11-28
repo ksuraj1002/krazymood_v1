@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/script_fragments::scriptsandstyles"></head>
+<style>
+	div.itr{
+		-webkit-box-shadow: 0px 0px 7px 3px rgba(72,72,74,1);
+-moz-box-shadow: 0px 0px 7px 3px rgba(72,72,74,1);
+box-shadow: 0px 0px 7px 3px rgba(72,72,74,1);
+border-radius:10px;
+	}
+	
+	div.navigationIcon{
+		-webkit-box-shadow: 0px 3px 5px 3px rgba(224,220,224,1);
+-moz-box-shadow: 0px 3px 5px 3px rgba(224,220,224,1);
+box-shadow: 0px 3px 5px 3px rgba(224,220,224,1);
+
+margin-top:10px;
+margin:10 auto;
+padding:20px;
+border-radius:10px;
+	}	
+</style>
+
+<script>
+	$("document").ready(function(){
+		 $('[data-toggle="tooltip"]').tooltip();   
+		$("#number").keyup(function(event){
+			if((event.keyCode != 26) || (event.keyCode !=27)){
+				
+				//$("input").css("background-color", "pink");
+				  var pageNum = $("#number").val();
+				 if(pageNum===0){
+					 pageNum='';
+				 }
+				  var href = $('#hrf').prop('href');
+				  if (event.keyCode == 8 || event.keyCode == 46) {
+					  href = href.substring(0,href.lastIndexOf("/")+1);
+					  href = href+pageNum;
+					 // alert("inside if con"+href+pageNum);
+					}else{ 
+						if(pageNum!=''){
+						pageNum = pageNum%10;	
+						}
+						href= $('#hrf').prop('href')+pageNum
+					}
+				  
+				   $("#hrf").attr("href", href); 
+				   // alert(href);
+				
+			}
+			   
+			});
+		
+		 
+		
+		
+		
+	});
+</script>
+
+<body>
+
+	<div class="body-inner">
+
+		<div th:replace="fragments/navigation::topnav"></div>
+		<div th:replace="fragments/navigation::mainnav"></div>
+
+		
+		<div th:replace="index1::redirectmsg"></div>
+		<!-- Presents content here  -->
+		<div class="row" style="margin:2px auto;">
+			<div class="col-md-8" style="padding:0 5px;">
+				
+				<div th:replace="fragments/content-fragments::poemandmisc"></div>
+				<div th:replace="fragments/content-fragments::poems"></div>
+				
+				
+				<div class="navigationIcon" th:if="${!page.isEmpty()}">
+					<div class="text-center" style="word-spacing: 50px;">
+
+						<div th:if="${category!=null && subcategory!=null}" >
+							<a
+									th:href="@{|/${category}/${subcategory}/page/${1}|}">
+									<!-- <i class="fa fa-fast-backward" aria-hidden="true"></i> -->
+									<img src="/images/fastback.png" style="width:10%;"/>
+							</a>
+							<a
+									th:classappend="${page.getPageable().getPageNumber()==0?'not-active':''}"
+									th:href="@{|/${category}/${subcategory}/page/${page.getPageable().getPageNumber()}|}">
+								<!-- 	<i class="fa fa-step-backward" aria-hidden="true"></i> -->
+								<img src="/images/back.png" style="width:10%;"/>
+								</a>
+							<a
+									th:classappend="${page.getPageable().getPageNumber()==page.getTotalPages()-1?'not-active':''}"
+									th:href="@{|/${category}/${subcategory}/page/${page.getPageable().getPageNumber()+2}|}">
+									<!-- <i class="fa fa-step-forward" aria-hidden="true"></i> -->
+									<img src="/images/next.png" style="width:10%;"/>
+							</a>
+							<a
+									th:href="@{|/${category}/${subcategory}/page/${page.getTotalPages()}|}">
+									<!-- <i class="fa fa-fast-forward" aria-hidden="true"></i> -->
+									<img src="/images/fastforward.png" style="width:10%;"/>
+							</a>
+						</div>
+
+						<div th:if="${category!='shero-shayari' && subcategory==null}">
+							<a th:href="@{|/${category}/page/${1}|}">
+							<!--  <i class="fa fa-fast-backward" aria-hidden="true"></i> -->
+							<img src="/images/fastback.png" style="width:10%;"/>
+							</a>
+							<a
+								th:classappend="${page.getPageable().getPageNumber()==0?'not-active':''}"
+								th:href="@{|/${category}/page/${page.getPageable().getPageNumber()}|}">
+								<!-- <i class="fa fa-step-backward" aria-hidden="true"></i> -->
+								<img src="/images/back.png" style="width:10%;"/>
+								</a>
+							<a
+								th:classappend="${page.getPageable().getPageNumber()==page.getTotalPages()-1?'not-active':''}"
+								th:href="@{|/${category}/page/${page.getPageable().getPageNumber()+2}|}">
+								<!-- <i class="fa fa-step-forward" aria-hidden="true"></i> -->
+								<img src="/images/next.png" style="width:10%;"/>
+								</a>
+							<a
+								th:href="@{|/${category}/page/${page.getTotalPages()}|}">
+								<!-- <i class="fa fa-fast-forward" aria-hidden="true"></i> -->
+								<img src="/images/fastforward.png" style="width:10%;"/>
+							</a>
+						</div>
+
+
+						<div th:if="${category=='shero-shayari'}">
+							<a
+									th:href="@{|/${category}/page/${1}|}">
+									<!-- <i class="fa fa-fast-backward" aria-hidden="true"></i> -->
+									<img src="/images/fastback.png" style="width:10%;"/>
+						   </a>
+							<a
+									th:classappend="${page.getPageable().getPageNumber()==0?'not-active':''}"
+									th:href="@{|/${category}/page/${page.getPageable().getPageNumber()}|}">
+									<!-- <i class="fa fa-step-backward" aria-hidden="true"></i> -->
+									<img src="/images/back.png" style="width:10%;"/>
+							</a>
+							<a
+									th:classappend="${page.getPageable().getPageNumber()==page.getTotalPages()-1?'not-active':''}"
+									th:href="@{|/${category}/page/${page.getPageable().getPageNumber()+2}|}">
+									<!-- <i class="fa fa-step-forward" aria-hidden="true"></i> -->
+									<img src="/images/next.png" style="width:10%;"/>
+									</a>
+							<a
+									th:href="@{|/${category}/page/${page.getTotalPages()}|}">
+									<!-- <i class="fa fa-fast-forward" aria-hidden="true"></i> -->
+									<img src="/images/fastforward.png" style="width:10%;"/>
+									</a>
+						</div>
+						
+
+						
+
+					</div>
+
+					<div class="text-center" style="padding:20px;" >
+						<i>Page:</i> <span th:text="${page.getPageable().getPageNumber()+1}"> </span> of <span th:text="${page.getTotalPages()}"></span>
+						<span><input type="text" id="number" value="" style="width:50px;" required/> 
+							<a th:if="${category!='shero-shayari' && subcategory==null}" th:href="@{|/${category}/page/|}" id="hrf"><button type="button" class="btn btn-default"><i>find</i></button></a>
+							<a th:if="${category!='shero-shayari' && subcategory!=null}" th:href="@{|/${category}/${subcategory}/page/|}" id="hrf"><button type="button" class="btn btn-default"><i>find</i></button></a>
+							<a th:if="${category=='shero-shayari'}" th:href="@{|/${category}/page/|}" id="hrf"><button type="button" class="btn btn-default"><i>find</i></button></a>
+						</span>
+					</div>
+				</div>
+
+				<div th:if="${page.isEmpty()}"> <h3>Sorry!! No Contents are available right now</h3></div>
+
+			</div>
+
+
+			
+			<div class="col-md-2" style="margin-top: 15px; padding:10px;">
+				<div th:replace="fragments/content-fragments::tablesofctgry"> </div>
+			</div>
+
+			<div class="col-md-2" style="border-left:0px solid #E6E6E6;margin-top: 15px; padding:10px;"><!-- Wait till upcoming contents --></div>
+		</div>
+		<!-- End of content here  -->
+
+		<footer id="footer" class="footer bg-overlay" style="margin-top:100px;">
+			<div class="copyright">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="copyright-info">
+								<span>Copyright � 2020 <a th:href="@{| / |}">krazyshayari.com</a></span>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-sm-6">
+							<div class="footer-menu">
+								<ul class="nav unstyled">
+									<li><a href="https://www.krazyshayari.com/about-us">About Us</a></li>
+									<li><a href="https://www.krazyshayari.com/contact-us">Contact Us</a></li>
+									<li><a href="https://www.krazyshayari.com/privacy-policy">Privacy Policy</a></li>
+									<li><a href="#" data-toggle="modal" data-target="#sendPost">Send your post</a></li>
+								</ul>
+							</div>
+						</div>
+					</div><!-- Row end -->
+
+					<div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
+						<button class="btn btn-primary" title="Back to Top">
+							<i class="fa fa-angle-double-up"></i>
+						</button>
+					</div>
+
+				</div><!-- Container end -->
+			</div><!-- Copyright end -->
+
+		</footer><!-- Footer end -->
+
+
+		<div th:replace="fragments/script_fragments::scripts"></div>
+	</div><!-- Body inner end -->
+	
+	<div th:replace="index1::sendthePost"></div>
+	
+</body>
+
+</html>
