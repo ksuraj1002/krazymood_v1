@@ -46,10 +46,13 @@
 
                 <ul class="nav-menu nav navbar-nav">
                     <li class="cat-2"><a href="/">Home</a></li>
-                    <li class="cat-4" th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
-                        <a  th:inline="text">
+                    <li class="cat-1" th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
+                        <a th:href="@{|/${category.title}|}" th:inline="text">
                             [[${category.title}]]
                         </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/shero-shayari/page/1}">Read All</a>
                     </li>
                 </ul>
 
@@ -241,37 +244,34 @@
 
                 <div class="section-row">
                     <div class="section-title">
-                        <h2>Leave a reply</h2>
-                        <p>your email address will not be published. required fields are marked *</p>
+                        <h2><u>Related Post:</u></h2>
                     </div>
-                    <form class="post-reply">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span>Name *</span>
-                                    <input class="input" type="text" name="name">
+                    <div class="section-row">
+                        <div class="col-md-6" th:each="relatedPost:${relatedPostList}">
+                            <div class="post">
+                                <figure>
+                                    <a class="post-img" th:href="@{|/${relatedPost.engHeader}|}">
+                                        <img class="img-responsive" th:src="@{'/storage/public_images/'+${relatedPost.imgname}}" th:attr="title=${relatedPost.text}">
+                                    </a>
+                                </figure>
+                                <div class="post-body">
+                                    <div class="post-meta">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(relatedPost.updatedOn, 'MMMM dd,yyyy')}"></span>
+                                        <i style="display: inline-block; content: '\2022'; padding:0 7px;">  </i>  <i class="fa fa-eye" aria-hidden="true"></i> <span style="font-size:13px;font-weight:bold;" th:text="${relatedPost.views}">23</span>
+                                    </div>
+                                    <p class="post-title">
+                                        <a th:href="@{|/${relatedPost.engHeader}|}" th:utext="${relatedPost.text}">Chrome Extension Protects Against
+                                        JavaScript-Based CPU Side-Channel Attacks</a>
+                                    </p>
+                                    <p>
+                                        <a th:href="@{|/${relatedPost.engHeader}|}">
+                                            <button class="btn btn-1 btn-1b">Read More</button>
+                                       </a>
+                                    </p>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span>Email *</span>
-                                    <input class="input" type="email" name="email">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span>Website</span>
-                                    <input class="input" type="text" name="website">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea class="input" name="message" placeholder="Message"></textarea>
-                                </div>
-                                <button class="primary-button">Submit</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
             </div>
@@ -340,7 +340,7 @@
                     <div class="category-widget">
                         <ul style="text-transform: capitalize;text-decoration: underline;">
                             <li th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
-                                <a class="cat-3" th:inline="text">[[${category.title}]]<span>340</span></a>
+                                <a class="cat-3" th:href="@{|/${category.title}|}" th:inline="text">[[${category.title}]]<span>340</span></a>
                             </li>
                            <!-- <li><a href="#" class="cat-2">JavaScript<span>74</span></a></li>
                             <li><a href="#" class="cat-4">JQuery<span>41</span></a></li>

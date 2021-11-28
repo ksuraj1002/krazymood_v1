@@ -30,7 +30,7 @@
             <div class="container">
 
                 <div class="nav-logo">
-                    <a href="index1.html" class="logo"><img src="img/xlogo.png.pagespeed.ic.s-UgktC5Y3.png" alt=""></a>
+                    <a href="/" class="logo"><img src="img/logo.png" alt=""></a>
                 </div>
 
 
@@ -244,14 +244,16 @@
                         <div class="section-row">
                             <a href="#">
                                 <a th:href="@{|/${pageNumber.tempCategoryName}/page/1|}" class="first">First</a>
-                                <a th:href="@{|/${pageNumber.tempCategoryName}/page/${pageNumber.pageNum-1}|}" class="previous">&laquo; Previous</a>
-                                <a th:href="@{|/${pageNumber.tempCategoryName}/page/${pageNumber.pageNum+1}|}" class="last">Next &raquo;</a>
+                                <a th:href="@{|/${pageNumber.tempCategoryName}/page/${pageNumber.pageNum>1?pageNumber.pageNum-1 :pageNumber.pageNum}|}" class="previous">&laquo; Previous</a>
+                                <a th:href="@{|/${pageNumber.tempCategoryName}/page/${pageNumber.pageNum<pageData.maxLinkedPages?pageNumber.pageNum+1 :pageData.maxLinkedPages}|}" class="last">Next &raquo;</a>
                                 <a th:href="@{|/${pageNumber.tempCategoryName}/page/${pageData.maxLinkedPages}|}" class="last">Last</a>
                             </a>
                         </div>
                     </div>
 
-
+                    <div>
+                        <h2><u>You may also like this</u></h2>
+                    </div>
                     <div class="col-md-12" th:each="diffCategory:${diffCategoryList}">
                         <div class="post post-row">
                             <a class="post-img" th:href="@{|/${diffCategory.engHeader}|}">
@@ -323,7 +325,7 @@
                     <div class="category-widget">
                         <ul style="text-transform: capitalize;text-decoration: underline;">
                             <li th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
-                                <a class="cat-3" th:inline="text">[[${category.title}]]<span>340</span></a>
+                                <a class="cat-3" th:href="@{|/${category.title}|}" th:inline="text">[[${category.title}]]<span>340</span></a>
                             </li>
                         </ul>
                     </div>

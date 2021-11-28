@@ -77,7 +77,7 @@ public class ContentService {
             List<Contents> listOfContentsWithDiffCat=null;
             int limit=5;
             int offset=(index-1)*limit;
-            Long totalContents = contentDao.getTotalCountsOfContents();
+            Long totalContents = contentDao.getTotalCountsOfContents(category);
             List<Contents> listOfContents= contentDao.getContentsByPageNumberAndCategories(category,offset,limit);
             listOfContents = listOfContents.stream().map(x->{
                 x.setTempCategoryName(category);
@@ -99,7 +99,7 @@ public class ContentService {
         }else{
             Contents content = findContentByHeader(category);
             mv.addObject("content", content);
-            mv.addObject("relatedPost",contentDao.getAllContentsByMostViewedAndsubCategory(content.getSubCategory().getSubCatName()));
+            mv.addObject("relatedPostList",contentDao.getAllContentsByMostViewedAndsubCategory(content.getSubCategory().getSubCatName()));
             mv.setViewName("feedback");
         }
         mv.addObject("mostViewedList", contentDao.findMostViewedContents());

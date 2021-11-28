@@ -488,7 +488,7 @@
                     <div class="category-widget">
                         <ul style="text-transform: capitalize;text-decoration: underline;">
                             <li th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
-                                <a class="cat-3" th:inline="text">[[${category.title}]]<span>340</span></a>
+                                <a class="cat-3" th:href="@{|/${category.title}|}" th:inline="text">[[${category.title}]]<span>340</span></a>
                             </li>
                         </ul>
                     </div>

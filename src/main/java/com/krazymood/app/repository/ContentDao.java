@@ -29,7 +29,7 @@ public class ContentDao{
     }
 
     public List<Contents> getAllContentsByMostViewedAndsubCategory(String subCategory) {
-        List<Contents> contents = entityManager.createQuery("select new Map(c.id as id,c.imgname as imgname,c.text as text,c.engHeader as engHeader,c.header as header,c.createdOn as createdOn,c.views as views,c.category as category,c.subCategory as subCategory) from Contents c  where c.subCategory.subCatName='"+subCategory+"' ORDER BY c.views desc").getResultList();
+        List<Contents> contents = entityManager.createQuery("select new Map(c.id as id,c.imgname as imgname,c.text as text,c.engHeader as engHeader,c.header as header,c.createdOn as createdOn,c.views as views,c.category as category,c.subCategory as subCategory,c.updatedOn as updatedOn) from Contents c  where c.subCategory.subCatName='"+subCategory+"' ORDER BY c.views desc").getResultList();
         return contents;
     }
 
@@ -39,8 +39,12 @@ public class ContentDao{
         return mostViewed;
     }
 
-    public Long getTotalCountsOfContents() {
-        return (Long) entityManager.createQuery("SELECT COUNT(c) FROM Contents c").getSingleResult();
+    public Long getTotalCountsOfContents(String category) {
+        if(category.equalsIgnoreCase("shero-shayari")){
+            return (Long) entityManager.createQuery("SELECT COUNT(c) FROM Contents c").getSingleResult();
+        }else{
+            return (Long) entityManager.createQuery("SELECT COUNT(c) FROM Contents c WHERE c.category.title ='"+category+"' OR c.subCategory.subCatName='"+category+"'").getSingleResult();
+        }
     }
 
 
