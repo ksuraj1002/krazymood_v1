@@ -36,7 +36,7 @@
 
                 <ul class="nav-menu nav navbar-nav">
                     <li class="cat-2"><a href="/">Home</a></li>
-                    <li class="cat-3" th:if="${category.visibility}" th:each="category: ${@contentService.getCategory()}">
+                    <li class="cat-3" th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
                         <a  th:inline="text">
                             [[${category.title}]]
                             <!-- <i class="fa fa-angle-down"></i>-->

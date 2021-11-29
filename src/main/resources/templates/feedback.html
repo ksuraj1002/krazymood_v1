@@ -175,20 +175,13 @@
                                 <img src="img/download.png" class="downImg" title="Download Image" />
                             </a>
                         </figure>
-                         <p th:utext="${content.text}" th:id="${'copyContent' + (content.id)}"></p>
+                        <div th:id="${'copyContent' + (content.id)}">
+                            <p th:utext="${content.text}" ></p>
+                        </div>
                         <figure class="divdownImg">
-                            <img src="img/copytxt.png" data-toggle="tooltip" style="height: 20%; width: 10%;" title="Copy text" th:id="${'copyContent_' + (content.id)}" th:attr="data-my-func-attr=${content.id}" />
+                            <img class="copyTxt" src="img/copytxt.png" data-toggle="tooltip" style="height: 20%; width: 10%;" title="Copy text" th:id="${'copyContent_' + (content.id)}" th:attr="data-my-func-attr=${content.id}" />
                         </figure>
                     </div>
-
-                   <!-- <div class="post-shares sticky-shares">
-                        <a href="#" class="share-facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="share-twitter"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="share-google-plus"><i class="fa fa-google-plus"></i></a>
-                        <a href="#" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
-                        <a href="#" class="share-linkedin"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-envelope"></i></a>
-                    </div>-->
                 </div>
 
 
@@ -366,20 +359,6 @@
                     </div>
                 </div>
 
-
-                <div class="aside-widget">
-                    <div class="section-title">
-                        <h2>Archive</h2>
-                    </div>
-                    <div class="archive-widget">
-                        <ul>
-                            <li><a href="#">January 2018</a></li>
-                            <li><a href="#">Febuary 2018</a></li>
-                            <li><a href="#">March 2018</a></li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -397,19 +376,16 @@
             <div class="col-md-5">
                 <div class="footer-widget">
                     <div class="footer-logo">
-                        <a href="index.html" class="logo"><img src="img/xlogo.png.pagespeed.ic.s-UgktC5Y3.png"
-                                                               alt=""></a>
+                        <a href="/" class="logo"><img src="img/logo.png" height="30%" width="50%" alt="krazyshayari.com"></a>
                     </div>
                     <ul class="footer-nav">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Advertisement</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/send-to-krazyshayari">Send your post</a></li>
                     </ul>
                     <div class="footer-copyright">
-<span>&copy; 
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
-            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com/"
-                                                                target="_blank">Colorlib</a>
-</span>
+                        <span>&copy;
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </span>
                     </div>
                 </div>
             </div>
@@ -419,9 +395,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         <div class="footer-widget">
                             <h3 class="footer-title">About Us</h3>
                             <ul class="footer-links">
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="#">Join Us</a></li>
-                                <li><a href="contact.html">Contacts</a></li>
+                                <li><a href="/about-us">About Us</a></li>
+                                <li><a href="/contact-us">Contacts</a></li>
+                                <li><a href="/privacy-policy">Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>
@@ -440,7 +416,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
             <div class="col-md-3">
                 <div class="footer-widget">
-                    <h3 class="footer-title">Join our Newsletter</h3>
+                    <h3 class="footer-title">Subscribe us</h3>
                     <div class="footer-newsletter">
                         <form>
                             <input class="input" type="email" name="newsletter" placeholder="Enter your email">
@@ -464,6 +440,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js%2bmain.js.pagespeed.jc.XwDhaBFLFp.js"></script>
+<script src="js/custom.js"></script>
 <script>eval(mod_pagespeed_15hy7ra_pu);</script>
 <script>eval(mod_pagespeed_RDDE5qW6SI);</script>
 

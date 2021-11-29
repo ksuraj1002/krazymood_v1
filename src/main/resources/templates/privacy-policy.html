@@ -1,117 +1,349 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/script_fragments::scriptsandstyles"></head>
+
+<!-- Mirrored from preview.colorlib.com/theme/webmag/about-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Jul 2021 11:13:47 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>WebMag HTML Template</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet"
+          href="css/A.bootstrap.min.css%2bfont-awesome.min.css%2bstyle.css%2cMcc._DTUmYfu2G.css.pagespeed.cf.bi1dhJdCdr.css"/>
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
 <body>
-<div class="body-inner">
 
-    <div th:replace="fragments/navigation::topnav"></div>
-    <div th:replace="fragments/navigation::mainnav"></div>
+<header id="header">
 
-    <div th:if="${readmsg}" th:fragment="redirectmsg">
-        <div th:class="${alertClass}">
-            <a href="#" class="close" data-dismiss="alert"
-               area-label="close">&times;</a>
-            <b th:text="${readmsg}">You are registered
-                successfully, please login.</b>
+    <div id="nav">
+
+        <div id="nav-fixed">
+            <div class="container">
+
+                <div class="nav-logo">
+                    <a href="/" class="logo"><img src="img/logo.png" alt=""></a>
+                </div>
+
+
+                <ul class="nav-menu nav navbar-nav">
+                    <li class="cat-2"><a href="/">Home</a></li>
+                    <li class="cat-3" th:if="${category.visibility}" th:each="category: ${@utilityService.getCategoryBean()}">
+                        <a  th:inline="text">
+                            [[${category.title}]]
+                            <!-- <i class="fa fa-angle-down"></i>-->
+                        </a>
+                    </li>
+                </ul>
+
+
+                <div class="nav-btns">
+                    <button class="aside-btn"><i class="fa fa-bars"></i></button>
+                    <button class="search-btn"><i class="fa fa-search"></i></button>
+                    <div class="search-form">
+                        <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+                        <button class="search-close"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="nav-aside">
+
+            <div class="section-row">
+                <ul class="nav-aside-menu">
+                    <li><a href="index1.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="#">Join Us</a></li>
+                    <li><a href="#">Advertisement</a></li>
+                    <li><a href="contact.html">Contacts</a></li>
+                </ul>
+            </div>
+
+
+            <div class="section-row">
+                <h3>Recent Posts</h3>
+                <div class="post post-widget">
+                    <a class="post-img" href="feedback.html"><img src="img/xwidget-2.jpg.pagespeed.ic.183VIkUWUH.jpg"
+                                                                  alt=""></a>
+                    <div class="post-body">
+                        <h3 class="post-title"><a href="feedback.html">Pagedraw UI Builder Turns Your Website Design
+                            Mockup Into Code Automatically</a></h3>
+                    </div>
+                </div>
+                <div class="post post-widget">
+                    <a class="post-img" href="feedback.html"><img src="img/xwidget-3.jpg.pagespeed.ic.NkT9v3Xk_w.jpg"
+                                                                  alt=""></a>
+                    <div class="post-body">
+                        <h3 class="post-title"><a href="feedback.html">Why Node.js Is The Coolest Kid On The Backend
+                            Development Block!</a></h3>
+                    </div>
+                </div>
+                <div class="post post-widget">
+                    <a class="post-img" href="feedback.html"><img src="img/xwidget-4.jpg.pagespeed.ic.KoyoxijWdu.jpg"
+                                                                  alt=""></a>
+                    <div class="post-body">
+                        <h3 class="post-title"><a href="feedback.html">Tell-A-Tool: Guide To Web Design And Development
+                            Tools</a></h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section-row">
+                <h3>Follow us</h3>
+                <ul class="nav-aside-social">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                </ul>
+            </div>
+
+
+            <button class="nav-aside-close"><i class="fa fa-times"></i></button>
+
+        </div>
+
+    </div>
+
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="page-header-breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                    <h1>Privacy Policy</h1>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div style="text-align: center"><h1>Privacy Policy</h1></div>
-    <div class="jumbotron jumbotron-fluid" style="color: #0d0d0d;text-align:justify-all; font-family:Poppins, Arial, sans-serif;">
-        <div class="container">
-            <p><h2>General Information</h2></p>
-            <p style="text-indent: 150px;">
-                The core intention of this site is to deliver the latest and trending greetings, shayari, quotes and status among their
-                loving/ liked one. This site is a way to deliver the emotions and feelings to other one.
-            </p>
-            <p><h2>Information we gather</h2></p>
-            <p style="text-indent: 50px;">
-                We may gather your information such as your Mail ID and Name only. We gather these information only when you share your
-                contents/ thoughts with us. The intention behind to gather these information is only to know the people who is sharing
-                and what is being shared. This would be very helpful to make the site very realistic and genuine.
-            </p>
-
-            <p><h2>Privacy Policy</h2></p>
-            <p style="text-indent: 50px;">
-                We allow third-party advertising company to serve ads when readers visit our site. Don't worry this site won't
-                take any personal information from you. This may keep track of your visiting to this site and show you ads on your
-                latest interest of goods and services.
-            </p>
-
-            <p><h2>Protection of your information</h2></p>
-            <p style="text-indent: 50px;">
-                We are liable to protect or keep secret of information (email and name) provided by you. We will never use your information for any commercial benefits.
-                Even we will not share any contents to you without your consent. Your consent is priority for us.
-            </p>
+</header>
 
 
+<div class="section">
 
-            <p><h2>Copyright Holder</h2></p>
-            <p style="text-indent: 50px;">
-                This sites contents are strictly prohibited for commercial use. We allow our user to share contents available on this site in personal level only.
-                Neither we do nor we want such kind of activity.
+    <div class="container">
 
-                We are not responsible for the content shared/ submitted by the user. If you find the violation of copyright.
-                Please feel free to contact/ inform us. We will definitely remove all those contents from our site.
-            </p>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="section-row">
+                    <p><h2>General Information</h2></p>
+                    <p style="text-indent: 150px;">
+                        The core intention of this site is to deliver the latest and trending greetings, shayari, quotes and status among their
+                        loving/ liked one. This site is a way to deliver the emotions and feelings to other one.
+                    </p>
+                    <p><h2>Information we gather</h2></p>
+                    <p style="text-indent: 50px;">
+                        We may gather your information such as your Mail ID and Name only. We gather these information only when you share your
+                        contents/ thoughts with us. The intention behind to gather these information is only to know the people who is sharing
+                        and what is being shared. This would be very helpful to make the site very realistic and genuine.
+                    </p>
 
-            <p><h2>Your consents</h2></p>
-            <p style="text-indent: 50px;">
-                By visiting our site, you are agree with the policy of our site. If this policy is against of your valuable data so please don't use this site.
-                Your consistent visiting to this site deemed your acceptance of all policy.
-            </p>
+                    <p><h2>Privacy Policy</h2></p>
+                    <p style="text-indent: 50px;">
+                        We allow third-party advertising company to serve ads when readers visit our site. Don't worry this site won't
+                        take any personal information from you. This may keep track of your visiting to this site and show you ads on your
+                        latest interest of goods and services.
+                    </p>
 
-            <p><h2>Disclaimer</h2></p>
-            <p style="text-indent: 50px;">
-                The contents in this site would be unique and maintains the good quality. Yet it happened in any way against of policy, so
-                that would only be a co-incident. By this site we are bound to share loves, a good thoughts and status to tell your
-                feeling among your people.
-                <div>
-                    <h4>Variation</h4>
+                    <p><h2>Protection of your information</h2></p>
+                    <p style="text-indent: 50px;">
+                        We are liable to protect or keep secret of information (email and name) provided by you. We will never use your information for any commercial benefits.
+                        Even we will not share any contents to you without your consent. Your consent is priority for us.
+                    </p>
+
+
+
+                    <p><h2>Copyright Holder</h2></p>
+                    <p style="text-indent: 50px;">
+                        This sites contents are strictly prohibited for commercial use. We allow our user to share contents available on this site in personal level only.
+                        Neither we do nor we want such kind of activity.
+
+                        We are not responsible for the content shared/ submitted by the user. If you find the violation of copyright.
+                        Please feel free to contact/ inform us. We will definitely remove all those contents from our site.
+                    </p>
+
+                    <p><h2>Your consents</h2></p>
+                    <p style="text-indent: 50px;">
+                        By visiting our site, you are agree with the policy of our site. If this policy is against of your valuable data so please don't use this site.
+                        Your consistent visiting to this site deemed your acceptance of all policy.
+                    </p>
+
+                    <p><h2>Disclaimer</h2></p>
+                    <p style="text-indent: 50px;">
+                        The contents in this site would be unique and maintains the good quality. Yet it happened in any way against of policy, so
+                        that would only be a co-incident. By this site we are bound to share loves, a good thoughts and status to tell your
+                        feeling among your people.
+                        <div>
+                            <h4>Variation</h4>
                     <p>krazyshayari.com can make any kind of variation at any time according to need.</p>
                     <p>Updated On <i>10-July-2021</i></p>
                 </div>
-            </p>
-        </div>
-    </div>
+            </div>
 
-    <footer id="footer" class="footer bg-overlay" style="margin-top:100px;">
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="copyright-info">
-                            <span>Copyright � 2020 <a th:href="@{| / |}">krazyshayari.com</a></span>
+            <div class="col-md-4">
+
+                <div class="aside-widget text-center">
+                    <a href="#" style="display: inline-block;margin: auto;">
+                        <img class="img-responsive" src="img/xad-1.jpg.pagespeed.ic.C1dNWPxojd.jpg" alt="">
+                    </a>
+                </div>
+
+
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Most Read</h2>
+                    </div>
+                    <div class="post post-widget">
+                        <a class="post-img" href="feedback.html"><img
+                                src="img/xwidget-1.jpg.pagespeed.ic.nqEkEDP2_z.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="feedback.html">Tell-A-Tool: Guide To Web Design And
+                                Development Tools</a></h3>
                         </div>
                     </div>
+                    <div class="post post-widget">
+                        <a class="post-img" href="feedback.html"><img
+                                src="img/xwidget-2.jpg.pagespeed.ic.183VIkUWUH.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="feedback.html">Pagedraw UI Builder Turns Your Website
+                                Design Mockup Into Code Automatically</a></h3>
+                        </div>
+                    </div>
+                    <div class="post post-widget">
+                        <a class="post-img" href="feedback.html"><img
+                                src="img/xwidget-3.jpg.pagespeed.ic.NkT9v3Xk_w.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="feedback.html">Why Node.js Is The Coolest Kid On The
+                                Backend Development Block!</a></h3>
+                        </div>
+                    </div>
+                    <div class="post post-widget">
+                        <a class="post-img" href="feedback.html"><img
+                                src="img/xwidget-4.jpg.pagespeed.ic.KoyoxijWdu.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="feedback.html">Tell-A-Tool: Guide To Web Design And
+                                Development Tools</a></h3>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="footer-menu">
-                            <ul class="nav unstyled">
-                                <li><a href="https://www.krazyshayari.com/about-us">About Us</a></li>
-                                <li><a href="https://www.krazyshayari.com/contact-us">Contact Us</a></li>
-                                <li><a href="https://www.krazyshayari.com/privacy-policy">Privacy Policy</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#sendPost">Send your post</a></li>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="footer-widget">
+                    <div class="footer-logo">
+                        <a href="index1.html" class="logo"><img src="img/xlogo.png.pagespeed.ic.s-UgktC5Y3.png" alt=""></a>
+                    </div>
+                    <ul class="footer-nav">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Advertisement</a></li>
+                    </ul>
+                    <div class="footer-copyright">
+<span>&copy; 
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com/"
+                                                                target="_blank">Colorlib</a>
+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="footer-title">About Us</h3>
+                            <ul class="footer-links">
+                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="#">Join Us</a></li>
+                                <li><a href="contact.html">Contacts</a></li>
                             </ul>
                         </div>
                     </div>
-                </div><!-- Row end -->
-
-                <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top affix">
-                    <button class="btn btn-primary" title="Back to Top">
-                        <i class="fa fa-angle-double-up"></i>
-                    </button>
+                    <div class="col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="footer-title">Catagories</h3>
+                            <ul class="footer-links">
+                                <li><a href="category.html">Web Design</a></li>
+                                <li><a href="category.html">JavaScript</a></li>
+                                <li><a href="category.html">Css</a></li>
+                                <li><a href="category.html">Jquery</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="col-md-3">
+                <div class="footer-widget">
+                    <h3 class="footer-title">Join our Newsletter</h3>
+                    <div class="footer-newsletter">
+                        <form>
+                            <input class="input" type="email" name="newsletter" placeholder="Enter your email">
+                            <button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                    <ul class="footer-social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            </div><!-- Container end -->
-        </div><!-- Copyright end -->
+    </div>
 
-    </footer><!-- Footer end -->
+</footer>
 
 
-    <div th:replace="fragments/script_fragments::scripts"></div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js%2bmain.js.pagespeed.jc.XwDhaBFLFp.js"></script>
+<script>eval(mod_pagespeed_15hy7ra_pu);</script>
+<script>eval(mod_pagespeed_RDDE5qW6SI);</script>
 
-</div>
-<div th:replace="index1::sendthePost"></div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer src="../../../static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"rayId":"6697ecd61f591b98","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
 </body>
+
+<!-- Mirrored from preview.colorlib.com/theme/webmag/about-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Jul 2021 11:13:48 GMT -->
 </html>
