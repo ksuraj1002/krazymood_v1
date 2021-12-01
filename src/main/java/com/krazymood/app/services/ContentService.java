@@ -119,4 +119,7 @@ public class ContentService {
         return contents;
     }
 
+    public  List<Contents> findMostViewedContents() {
+        return contentDao.findMostViewedContents();
+    }
 }

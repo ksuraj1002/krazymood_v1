@@ -7,10 +7,8 @@ import com.krazymood.app.services.ContentService;
 import com.krazymood.app.services.FirebaseService;
 import com.krazymood.app.services.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -99,12 +97,14 @@ public class RequestHandler {
 	}
 
 	@RequestMapping(value="/about-us", method = RequestMethod.GET)
-	public String getAboutUs(){
+	public String getAboutUs(Model model){
+		model.addAttribute("mostViewedList", contentService.findMostViewedContents());
 		return "about-us";
 	}
 
 	@RequestMapping(value="/privacy-policy", method = RequestMethod.GET)
-	public String getprivacyPolicy(){
+	public String getprivacyPolicy(Model model){
+		model.addAttribute("mostViewedList", contentService.findMostViewedContents());
 		return "privacy-policy";
 	}
 

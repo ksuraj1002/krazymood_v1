@@ -13,8 +13,8 @@ public class ContentDao{
     EntityManager entityManager;
 
     public List<Contents> findContentBySearchStrings(String trnslateVal) {
-        String sql = "SELECT C FROM Contents C WHERE C.engHeader LIKE '"+trnslateVal+"' OR C.header LIKE '"+trnslateVal+"'";
-        List<Contents> contents = (List<Contents>) entityManager.createQuery(sql,Contents.class);
+        String sql = "SELECT C FROM Contents C WHERE C.engHeader LIKE '%"+trnslateVal+"%' OR C.header LIKE '%"+trnslateVal+"%'";
+        List<Contents> contents = entityManager.createQuery(sql,Contents.class).getResultList();
         return contents;
     }
 

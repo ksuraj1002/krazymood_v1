@@ -55,9 +55,11 @@
                     <button class="aside-btn"><i class="fa fa-bars"></i></button>
                     <button class="search-btn"><i class="fa fa-search"></i></button>
                     <div class="search-form">
-                        <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+                        <input class="search-input" type="text" name="search" id="searchItm" placeholder="Enter Your Search ...">
                         <button class="search-close"><i class="fa fa-times"></i></button>
+                        <div id="searchCntnt"></div>
                     </div>
+
                 </div>
 
             </div>
@@ -209,7 +211,48 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" th:id="'myModal'+${pageContent.id}" role="dialog" style="margin-top:200px;">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"><i>Share with your friends</i></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Facebook -->
+                                        <a th:href="@{|http://www.facebook.com/sharer.php?u=https:/krazyshayari.com  /${pageContent.engHeader}|}" target="_blank">
+                                            <img src="/images/facebookround.png" title="Facebook" style="width:65px;"/>
+                                        </a>
+                                        <!-- Twitter -->
+                                        <a th:href="@{|https://twitter.com/share?url=https://krazyshayari.com  /${pageContent.engHeader}&amp;text=${@utilityService.getStrippedContentforSocialSharing(pageContent)}|}" target="_blank">
+                                            <img src="/images/twitterround.png" title="Twitter" style="width:65px;" />
+                                            <!--   -->
+                                        </a>
+
+                                        <!-- LinkedIn -->
+                                        <a th:href="@{|http://www.linkedin.com/shareArticle?mini=true&amp;url=https:/krazyshayari.com  /${pageContent.engHeader}|}" target="_blank">
+                                            <img src="/images/linkedinround.png" title="LinkedIn" style="width:65px;" />
+                                        </a>
+                                        <a th:href="@{|tg://msg_url?url=https://krazyshayari.com /${pageContent.engHeader}&amp;text=${@utilityService.getStrippedContentforSocialSharing(pageContent)}|}">
+                                            <img src="/images/telegramround.png" title="Telegram" style="width:65px;"/>
+                                        </a>
+                                        <a  th:href="@{|https://api.whatsapp.com/send?text=${@utilityService.getStrippedContentforSocialSharing(pageContent)}|}" data-action="share/whatsapp/share">
+                                            <img src="/images/whatsappround.png" style="width:65px;" />
+                                        </a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+                   <!-- end iterration-->
 
 
                     <div class="col-md-6">
@@ -376,12 +419,8 @@
 
 </div>
 
-
-
 <footer id="footer">
-
     <div class="container">
-
         <div class="row">
             <div class="col-md-5">
                 <div class="footer-widget">

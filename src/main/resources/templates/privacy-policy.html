@@ -49,9 +49,11 @@
                     <button class="aside-btn"><i class="fa fa-bars"></i></button>
                     <button class="search-btn"><i class="fa fa-search"></i></button>
                     <div class="search-form">
-                        <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+                        <input class="search-input" type="text" name="search" id="searchItm" placeholder="Enter Your Search ...">
                         <button class="search-close"><i class="fa fa-times"></i></button>
+                        <div id="searchCntnt"></div>
                     </div>
+
                 </div>
 
             </div>
@@ -153,22 +155,17 @@
                         contents/ thoughts with us. The intention behind to gather these information is only to know the people who is sharing
                         and what is being shared. This would be very helpful to make the site very realistic and genuine.
                     </p>
-
                     <p><h2>Privacy Policy</h2></p>
                     <p style="text-indent: 50px;">
                         We allow third-party advertising company to serve ads when readers visit our site. Don't worry this site won't
                         take any personal information from you. This may keep track of your visiting to this site and show you ads on your
                         latest interest of goods and services.
                     </p>
-
                     <p><h2>Protection of your information</h2></p>
                     <p style="text-indent: 50px;">
                         We are liable to protect or keep secret of information (email and name) provided by you. We will never use your information for any commercial benefits.
                         Even we will not share any contents to you without your consent. Your consent is priority for us.
                     </p>
-
-
-
                     <p><h2>Copyright Holder</h2></p>
                     <p style="text-indent: 50px;">
                         This sites contents are strictly prohibited for commercial use. We allow our user to share contents available on this site in personal level only.
@@ -177,20 +174,18 @@
                         We are not responsible for the content shared/ submitted by the user. If you find the violation of copyright.
                         Please feel free to contact/ inform us. We will definitely remove all those contents from our site.
                     </p>
-
                     <p><h2>Your consents</h2></p>
                     <p style="text-indent: 50px;">
                         By visiting our site, you are agree with the policy of our site. If this policy is against of your valuable data so please don't use this site.
                         Your consistent visiting to this site deemed your acceptance of all policy.
                     </p>
-
                     <p><h2>Disclaimer</h2></p>
                     <p style="text-indent: 50px;">
                         The contents in this site would be unique and maintains the good quality. Yet it happened in any way against of policy, so
                         that would only be a co-incident. By this site we are bound to share loves, a good thoughts and status to tell your
                         feeling among your people.
-                        <div>
-                            <h4>Variation</h4>
+                    </p>
+                    <h4>Variation</h4>
                     <p>krazyshayari.com can make any kind of variation at any time according to need.</p>
                     <p>Updated On <i>10-July-2021</i></p>
                 </div>
@@ -205,40 +200,27 @@
                 </div>
 
 
-                <div class="aside-widget">
+                <div class="aside-widget" >
                     <div class="section-title">
-                        <h2>Most Read</h2>
+                        <h2><u>Most Viewed Contents</u></h2>
                     </div>
-                    <div class="post post-widget">
-                        <a class="post-img" href="feedback.html"><img
-                                src="img/xwidget-1.jpg.pagespeed.ic.nqEkEDP2_z.jpg" alt=""></a>
-                        <div class="post-body">
-                            <h3 class="post-title"><a href="feedback.html">Tell-A-Tool: Guide To Web Design And
-                                Development Tools</a></h3>
-                        </div>
-                    </div>
-                    <div class="post post-widget">
-                        <a class="post-img" href="feedback.html"><img
-                                src="img/xwidget-2.jpg.pagespeed.ic.183VIkUWUH.jpg" alt=""></a>
-                        <div class="post-body">
-                            <h3 class="post-title"><a href="feedback.html">Pagedraw UI Builder Turns Your Website
-                                Design Mockup Into Code Automatically</a></h3>
-                        </div>
-                    </div>
-                    <div class="post post-widget">
-                        <a class="post-img" href="feedback.html"><img
-                                src="img/xwidget-3.jpg.pagespeed.ic.NkT9v3Xk_w.jpg" alt=""></a>
-                        <div class="post-body">
-                            <h3 class="post-title"><a href="feedback.html">Why Node.js Is The Coolest Kid On The
-                                Backend Development Block!</a></h3>
-                        </div>
-                    </div>
-                    <div class="post post-widget">
-                        <a class="post-img" href="feedback.html"><img
-                                src="img/xwidget-4.jpg.pagespeed.ic.KoyoxijWdu.jpg" alt=""></a>
-                        <div class="post-body">
-                            <h3 class="post-title"><a href="feedback.html">Tell-A-Tool: Guide To Web Design And
-                                Development Tools</a></h3>
+                    <div style="overflow-y:scroll;height:480px;">
+                        <div class="post post-widget" th:if="${content.views != 0}"  th:each="content:${mostViewedList}">
+                            <div class="post-img">
+                                <a  th:href="@{|/${content.engHeader}|}">
+                                    <img th:src="@{'/storage/public_images/'+${content.imgname}}">
+                                </a>
+
+                                <span style="font-size: 12px;"><i class="fa fa-clock-o" aria-hidden="true"></i> <span th:text="${T(com.krazymood.app.utility.Utility).convertDateTimeToStr(content.updatedOn, 'MMM dd,yyyy')}"></span></span>
+                                <span style="font-size: 8px;"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
+                                <span style="font-size: 12px; padding:0 3px;"><i class="fa fa-eye" aria-hidden="true"></i> <span th:text="${content.views}">23</span></span>
+                            </div>
+                            <div class="post-body">
+                                <a th:href="@{|/${content.engHeader}|}">
+                                    <p th:utext="${getText}" th:with="getText=${T(com.krazymood.app.utility.Utility).contractLength(content.text,'shortText')}">Landed<p>
+                                    <!--  <p th:utext="${T(com.krazymood.app.utility.Utility).lengthContra('mostviewed','mostViewed')}">Landed<p>  -->
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -314,6 +296,7 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js%2bmain.js.pagespeed.jc.XwDhaBFLFp.js"></script>
+<script src="js/custom.js"></script>
 <script>eval(mod_pagespeed_15hy7ra_pu);</script>
 <script>eval(mod_pagespeed_RDDE5qW6SI);</script>
 
