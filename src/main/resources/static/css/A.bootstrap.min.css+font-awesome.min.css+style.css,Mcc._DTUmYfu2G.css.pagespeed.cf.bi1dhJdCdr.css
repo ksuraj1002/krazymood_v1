@@ -1867,30 +1867,6 @@ textarea.input {
     background: transparent
 }
 
-
-
-.nav-btns .search-form.active {
-    opacity: 1;
-    visibility: visible
-}
-
-
-
-.nav-btns .search-form .search-close {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    line-height: 20px;
-    color: #212631;
-    font-size: 22px;
-    padding: 0
-}
-
 #nav-aside {
     position: fixed;
     right: 0;
@@ -2597,35 +2573,19 @@ img.downImg {
     color: black;
 }
 
-.nav-btns .search-form #searchCntnt {
-    z-index: 99;
-    background: #fff;
-    box-shadow: -1px 3px 5px grey;
-    width: 350px;
-    position: static;
+/*search forms*/
+.nav-btns .search-form {
+    background: #0b2e13;
+    width: 90%;
+    left:5%;
+    margin: auto;
+    position: absolute;
 }
 
 .nav-btns .search-form .search-input {
-    height: 50%;
-    width: 350px;
-    border: 1px solid black;
-    background: #fff;
+    width: 100%;
     padding: 2px;
     font-weight: 600;
-    margin-top: 72px;
-    right:15px;
-    position: absolute;
+    margin: auto 0;
 }
 
-.nav-btns .search-form {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 0 15px;
-    opacity: 0;
-    visibility: hidden;
-    -webkit-transition: .3s all;
-    transition: .3s all
-}

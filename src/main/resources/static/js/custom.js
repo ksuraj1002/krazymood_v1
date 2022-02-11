@@ -1,4 +1,7 @@
+$("button.search-close").hide();
+$("div.search-form").hide();
 $(document).ready(function() {
+
 	//copying text
 	$('.copyTxt').on("click", function() {
 		id=$(this).data("my-func-attr");
@@ -57,6 +60,18 @@ $(document).ready(function() {
 			});
 
 		}
+	});
+
+	$("button.search-btn").click(function(){
+		$("button.search-close").show();
+		$("div.search-form").show();
+		$("button.search-btn").hide();
+	});
+
+	$("button.search-close").click(function(){
+		$("button.search-btn").show();
+		$("button.search-close").hide();
+		$("div.search-form").hide();
 	});
 
 });
