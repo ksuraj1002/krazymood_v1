@@ -1,3 +1,4 @@
+
 package com.krazymood.app.entities;
 
 import com.krazymood.app.component.Category;

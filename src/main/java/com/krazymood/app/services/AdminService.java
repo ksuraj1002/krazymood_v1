@@ -1,7 +1,28 @@
 package com.krazymood.app.services;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.google.cloud.firestore.Firestore;
-import com.google.cloud.storage.*;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.firebase.FirebaseOptions;
 import com.google.gson.Gson;
 import com.krazymood.app.component.Category;
@@ -10,19 +31,6 @@ import com.krazymood.app.entities.Contents;
 import com.krazymood.app.entities.Users;
 import com.krazymood.app.repository.AdminDao;
 import com.krazymood.app.repository.UtilityDao;
-import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.transaction.Transactional;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 @Service
 public class AdminService {
@@ -30,12 +38,14 @@ public class AdminService {
     FirebaseService firebaseService;
     @Autowired AdminDao adminDao;
 
+
     FirebaseOptions firebaseOptions;
     Bucket bucket;
     Firestore firestore;
 
 
     @Autowired UtilityDao utilityDao;
+    @Autowired EmailService emailService;
 
     @Value("${upload.location.path}")
     private String uploadLocation;
@@ -43,29 +53,25 @@ public class AdminService {
     @Transactional
     public void saveContent(MultipartFile fileImage, String jsondata) throws ParseException, IOException {
         String uDate = new SimpleDateFormat("ddMMyyyyhhmmss").format(new Date());
-        String fileName = uploadFile(fileImage);
+       String fileName = firebaseService.uploadFile(fileImage);
         Contents contents = new Gson().fromJson(jsondata,Contents.class);
+      
         contents.setCategory(new Category(contents.getCategoryId()));
         contents.setSubCategory(new SubCategory(contents.getSubCategoryId()));
+      
         contents.setImgname(uDate+fileName.substring(fileName.lastIndexOf('.')));
         contents.setTxtLngth(contents.getText().length());
         contents.isSpecific(Boolean.parseBoolean(contents.getIsSpecificStr()));
-        utilityDao.saveObject(contents);
+        Map<String,Object> map=utilityDao.saveObject(contents);
+
+        if(Integer.parseInt(map.get("ResCode").toString())==1){
+            List<Users> listOfUsers= (List<Users>) utilityDao.getAllModalData(Users.class,"Users","isSubscribed","1","id","ASC");
+            emailService.sendUpdatesToUsers(listOfUsers,contents);
+        }
+
     }
 
-    public String uploadFile(MultipartFile multipartFile) {
-        try {
-            Storage storage = bucket.getStorage();
-            String filename = "public_images/" + generateFileName(multipartFile);
-            BlobId blobId = BlobId.of(bucket.getName(), filename);
-            BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(multipartFile.getContentType()).build();
-            Blob blob = storage.create(blobInfo, multipartFile.getBytes());
-            return filename;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+   
     private String generateFileName(MultipartFile multiPart) {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
         String uDate = sdf.format(new Date());
@@ -81,8 +87,9 @@ public class AdminService {
         utilityDao.saveObject(category);
     }
 
-    public List<SubCategory> findByCategory_Id(Integer category, List<Category> categoryBean) {
-       return (List<SubCategory>) categoryBean.get(category).getSubCategory();
+    public Set<SubCategory> findByCategory_Id(Integer category, List<Category> categoryBean) {
+    	Set<SubCategory> list= categoryBean.get(category-1).getSubCategory();
+        return list;
     }
 
     public void saveCategoriesOnload(List<Category> categories) {

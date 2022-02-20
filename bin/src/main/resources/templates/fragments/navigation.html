@@ -1,0 +1,156 @@
+<div id="top-bar" class="top-bar" th:fragment="topnav">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<ul class="top-info">
+							<li>
+							<!-- <a href="/nepali"><i></i>नेपाली </a> -->
+							<i>&nbsp;</i>
+							<a href="/"><i></i>हिंदी  </a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<ul class="top-info">
+							<li><!-- <i class="fa fa-map-marker">&nbsp;</i>
+								<p class="info-text">Noida, Uttar Pradesh, India</p> -->
+								<i class="fa fa-clock-o" aria-hidden="true"></i><i th:text="${T(com.krazymood.app.utility.Utility).setTimeZone()}" style="font-size:15px;"></i>
+							</li>
+						</ul>
+					</div>
+					<!--/ Top info end -->
+
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 top-social text-right">
+						<!-- <ul class="unstyled">
+							<li>
+								<a title="Facebook" href="https://facebbok.com/themefisher.com">
+									<span class="social-icon"><i class="fa fa-facebook"></i></span>
+								</a>
+								<a title="Twitter" href="https://twitter.com/themefisher.com">
+									<span class="social-icon"><i class="fa fa-twitter"></i></span>
+								</a>
+								<a title="Instagram" href="https://instagram.com/themefisher.com">
+									<span class="social-icon"><i class="fa fa-instagram"></i></span>
+								</a>
+							</li>
+						</ul> -->
+						<a href="#" data-toggle="modal" data-target="#sendPost">Send your post</a>
+					</div>
+					<!--/ Top social end -->
+				</div>
+				<!--/ Content row end -->
+			</div>
+			<!--/ Container end -->
+		</div>
+		<!--/ Topbar end -->
+		
+		
+		
+		
+		<!-- Header start -->
+		<header id="header" class="header-one" th:fragment="mainnav">
+			<div class="container">
+				<div class="row">
+					<div class="logo-area clearfix">
+						<div class="logo col-xs-12 col-md-3">
+							<a href="/"><img src="images/krazylogos.png" style="height:150px; width:150px;" alt=""></a>
+						</div><!-- logo end -->
+
+						<div class="col-xs-12 col-md-9 header-right">
+							<!-- <ul class="top-info-box">
+								<li>
+									<div class="info-box">
+										<div class="info-box-content">
+											<p class="info-box-title">Call Us</p>
+											<p class="info-box-subtitle">(+9) 847-291-4353</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="info-box">
+										<div class="info-box-content">
+											<p class="info-box-title">Email Us</p>
+											<p class="info-box-subtitle">office@Constra.com</p>
+										</div>
+									</div>
+								</li>
+								<li class="last">
+									<div class="info-box last">
+										<div class="info-box-content">
+											<p class="info-box-title">Global Certificate</p>
+											<p class="info-box-subtitle">ISO 9001:2017</p>
+										</div>
+									</div>
+								</li>
+								<li class="header-get-a-quote">
+									<a class="btn btn-primary" href="contact.html">Get A Quote</a>
+								</li>
+							</ul> --><!-- Ul end -->
+						</div><!-- header right end -->
+						
+					</div><!-- logo area end -->
+
+				</div><!-- Row end -->
+			</div><!-- Container end -->
+
+			<nav class="site-navigation navigation navdown">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="site-nav-inner pull-left">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+
+								<div class="collapse navbar-collapse navbar-responsive-collapse">
+									<ul class="nav navbar-nav">
+										<li class="dropdown active">
+											<a th:href="@{|/|}">Home</a>
+										</li>
+
+										<li class="dropdown" th:if="${category.visibility}" th:each="category: ${@contentService.getCategory()}">
+										
+											<a  th:inline="text" class="dropdown-toggle" data-toggle="dropdown" >
+											  [[${category.title}]]
+											  <i class="fa fa-angle-down"></i>
+										    </a>
+											
+											<ul class="dropdown-menu" role="menu">
+												<li><a th:href="@{|${subcategory.subCatName}/page/1|}" th:each="subcategory: ${category.subCategory}" th:text="${T(com.krazymood.app.utility.Utility).getHeader(subcategory.subCatName)}">SubCategory</a></li>
+											</ul>
+										</li>
+
+										<li><a th:href="@{|/shero-shayari/page/${1}|}">Read All</a></li>
+									</ul>
+									<!--/ Nav ul end -->
+								</div>
+								<!--/ Collapse end -->
+
+							</div><!-- Site Navbar inner end -->
+
+						</div>
+						<!--/ Col end -->
+					</div>
+					<!--/ Row end -->
+
+					<div class="nav-search">
+						<span id="search"><i class="fa fa-search"></i></span>
+					</div><!-- Search end -->
+
+					<div class="search-block" style="display: none;">
+						<input type="hidden" th:value="${lan}" id="lan" />
+						<input type="text" class="form-control" id="searchItm" placeholder="for better search type in ">
+						<span class="search-close">&times;</span>
+						<div id="searchCntnt"></div>
+					</div><!-- Site search end -->
+
+				</div>
+				<!--/ Container end -->
+
+			</nav>
+			<!--/ Navigation end -->
+		</header>
+		<!--/ Header end -->

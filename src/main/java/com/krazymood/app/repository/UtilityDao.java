@@ -1,18 +1,17 @@
 package com.krazymood.app.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.util.ObjectUtils;
 
 @Repository
 public class UtilityDao {
@@ -22,6 +21,7 @@ public class UtilityDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Transactional
     public Map<String,Object> saveObject(Object object){
         Map<String,Object> map=new HashMap<String,Object>();
         try{

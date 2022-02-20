@@ -60,8 +60,8 @@ public class AdminHandler {
 	
 	@ResponseBody
 	@RequestMapping(value="/getsubcategories",method = RequestMethod.GET)
-	public List<SubCategory> getSubCategories(@RequestParam(name="category") Integer category) {
-		List<SubCategory> subCategory=adminService.findByCategory_Id(category,utilityService.getCategoryBean());
+	public Set<SubCategory> getSubCategories(@RequestParam(name="category") Integer category) {
+		Set<SubCategory> subCategory=adminService.findByCategory_Id(category,utilityService.getCategoryBean());
 		return subCategory;
 	}
 	
@@ -76,8 +76,8 @@ public class AdminHandler {
 	@ResponseBody
 	@RequestMapping(value="/getNotifications",method = RequestMethod.GET)
 	public List<Users> getNotifications() {
-		List<Users> users = adminService.findAllByIsWatched(false);
-		return users;
+		//List<Users> users = adminService.findAllByIsWatched(false);
+		return null;
 	}
 	
 	

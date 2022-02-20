@@ -44,7 +44,7 @@ $(document).ready(function() {
 						for(var i=0; i<data.length; i++){
 							truncateText = addSplittedWord(($(data[i].text).text()).trim());
 							/*+data[i].language+'/'+data[i].category.title+'/'+data[i].subCategory.subCatName+'/'+data[i].id+'/'*/
-							res+="<tr><td><a href='/"+data[i].engHeader +"'> <img src='/storage/public_images/"+data[i].imgname+"' style='width:100px;padding:2px 5px;' /> </a></td><td><a href='/"+data[i].engHeader +"'>"+ truncateText + "</a></td></tr>"
+							res+="<tr><td><a href='/"+data[i].engHeader +"'> <img src='/storage/public_images/"+data[i].imgname+"' style='width:100px;padding:2px 5px;' /> </a></td><td><a href='/"+data[i].engHeader +"'>"+ truncateText + "......</a></td></tr>"
 						}
 						res+="</table>";
 						$("#searchCntnt").html(res);
@@ -73,5 +73,47 @@ $(document).ready(function() {
 		$("button.search-close").hide();
 		$("div.search-form").hide();
 	});
+	
+	/*subscribe module*/
+	
+	$("#newsletter-btn").click(function (event) {
+		        event.preventDefault();
+
+				if ($('#email').val().length === 0) {
+       			 	alert('This field cannot be blank');
+					return false;
+    			}else{
+					var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+					var flag = regex.test($('#email').val());
+					if(!flag){
+						alert('Incorrect mail id');
+						return flag;
+					}
+					
+				}
+
+                $.ajax({
+                    type: "POST",
+                    url: "/subscribe",
+                    data: JSON.stringify({email:$("#email").val()}),
+ 					contentType: "application/json", 
+                    cache: false,
+                    success: function (data) {
+						if(data.ResCode==1){
+							alert("Subscribed Successfully");
+                        	console.log("SUCCESS : ", data);
+						}else{
+							alert("Failed to subscribe");
+                        	console.log("Failed : ", data);
+						}
+						
+                    },
+                    error: function (e) {
+                            alert("Failed to subscribe");
+                        	console.log("Error : ", e);
+                    }
+                });
+            });
+            /*****/
 
 });

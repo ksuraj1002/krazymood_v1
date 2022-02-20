@@ -1,7 +1,6 @@
 package com.krazymood.app.entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +16,13 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long id;
 	public String name;
+	@Column(columnDefinition = "text",nullable = false,unique = true)
 	public String email;
 	@Column(columnDefinition = "text",nullable = false)
 	public String contents;
 	public String subCategory;
 	public boolean isWatched;
+	public boolean isSubscribed;
 
 	private LocalDateTime createdOn = LocalDateTime.now();
 	private LocalDateTime updatedOn = LocalDateTime.now();
@@ -89,4 +90,11 @@ public class Users {
 		this.hiddenURL = hiddenURL;
 	}
 
+	public boolean isSubscribed() {
+		return isSubscribed;
+	}
+
+	public void setSubscribed(boolean subscribed) {
+		isSubscribed = subscribed;
+	}
 }

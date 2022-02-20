@@ -147,8 +147,8 @@
 				$("#header").show();
 
                 var jsonDataObj = {
-                    "categories": $("#category").val(),
-                    "subCategory": $("#subcategory").val(),
+                    "categoryId": $("#category").val(),
+                    "subCategoryId": $("#subcategory").val(),
                     "header": $("#header").val(),
                     "engHeader": $("#engheader").val(),
                     "language": $("#language").val(),
@@ -267,7 +267,7 @@
 
 
 	setInterval(function(){
-		callNotification();
+		//callNotification();
 	}, 3000);
 
 	function callNotification(){

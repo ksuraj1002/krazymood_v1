@@ -1,5 +1,6 @@
 package com.krazymood.app.services;
 
+import com.google.common.collect.Multiset.Entry;
 import com.krazymood.app.component.Category;
 import com.krazymood.app.component.SubCategory;
 import com.krazymood.app.entities.Contents;
@@ -122,4 +123,14 @@ public class ContentService {
     public  List<Contents> findMostViewedContents() {
         return contentDao.findMostViewedContents();
     }
+
+	public Map<Category, List<Contents>> getTotalNumberForeachCategory(List<Contents> listOfContents, List<String> listOfCategories) {
+		Map<Category, List<Contents>> categoryGroup = listOfContents.stream().collect(Collectors.groupingBy(Contents::getCategory));
+		Map<String,Integer> count=new HashMap<String,Integer>();
+		for(String str:listOfCategories) {
+			listOfCategories.stream().filter(listOfCategories.contains(str));
+		}
+		
+		return 	categoryGroup;    
+	}
 }

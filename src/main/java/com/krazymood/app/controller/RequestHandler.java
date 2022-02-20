@@ -3,6 +3,7 @@ package com.krazymood.app.controller;
 import com.krazymood.app.entities.Contents;
 import com.krazymood.app.entities.Users;
 import com.krazymood.app.repository.GalleryRepository;
+import com.krazymood.app.repository.UtilityDao;
 import com.krazymood.app.services.ContentService;
 import com.krazymood.app.services.FirebaseService;
 import com.krazymood.app.services.UtilityService;
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RequestHandler {
@@ -29,6 +31,7 @@ public class RequestHandler {
 	@Autowired ContentService contentService;
 	@Autowired UtilityService utilityService;
 	@Autowired FirebaseService firebaseService;
+	@Autowired UtilityDao utilityDao;
 
 	//hindi by default
 	@RequestMapping(value = {"","/","index","home"}, method = RequestMethod.GET)
@@ -38,6 +41,7 @@ public class RequestHandler {
 		model.addAttribute("content", listOfContents.get(0));
 		model.addAttribute("mostViewedList", contentService.findMostViewedContents(listOfContents));
 		model.addAttribute("specificContentList", contentService.findSpecificContents(listOfContents));
+		model.addAttribute("getTotalNumberOfCategory",contentService.getTotalNumberForeachCategory(listOfContents,utilityService.getCategories()));
 		return "index";
 	}
 
@@ -111,6 +115,14 @@ public class RequestHandler {
 	@RequestMapping(value="/contact-us", method = RequestMethod.GET)
 	public String getContactUs(){
 		return "contact-us";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/subscribe", method = RequestMethod.POST)
+	public Map<String,Object> postSubscribe(@RequestBody Users users){
+		users.setContents("testContent");
+		users.isSubscribed=true;
+		return utilityDao.saveObject(users);
 	}
 
 	@RequestMapping(value="/{category}/page/{idx}",method=RequestMethod.GET )

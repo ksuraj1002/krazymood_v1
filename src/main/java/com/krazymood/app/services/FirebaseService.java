@@ -5,7 +5,9 @@ import com.google.cloud.ReadChannel;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -91,6 +93,21 @@ public class FirebaseService {
              System.err.print("File not found: "+filename);
         }
         return content;
+    }
+    
+    
+    public String uploadFile(MultipartFile multipartFile) {
+        try {
+            Storage storage = bucket.getStorage();
+            String filename = "public_images/" + generateFileName(multipartFile);
+            BlobId blobId = BlobId.of(bucket.getName(), filename);
+            BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(multipartFile.getContentType()).build();
+            Blob blob = storage.create(blobInfo, multipartFile.getBytes());
+            return filename;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
