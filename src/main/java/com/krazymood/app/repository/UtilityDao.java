@@ -56,11 +56,12 @@ public class UtilityDao {
     public List<?> getAllModalData(Class<?> modal,String className,String column,String field,String orderBy,String orderType){
         String sql;
         if(!(ObjectUtils.isEmpty(column) && ObjectUtils.isEmpty(field))){
-            sql="SELECT C FROM "+className+" C WHERE "+column+"='"+field+"' ORDER BY "+orderBy+" "+orderType;
+            sql="SELECT C FROM "+className+" C WHERE C."+column+"='"+field+"' ORDER BY C."+orderBy+" "+orderType;
         }else{
-            sql="SELECT C FROM "+className+" C ORDER BY "+orderBy+" "+orderType;
+            sql="SELECT C FROM "+className+" C ORDER BY C."+orderBy+" "+orderType;
         }
-        return entityManager.createQuery(sql,modal).getResultList();
+        List<?> s = entityManager.createQuery(sql,modal).getResultList();
+        return s;
     }
 
 }

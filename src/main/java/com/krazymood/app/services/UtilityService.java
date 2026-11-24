@@ -18,7 +18,7 @@ public class UtilityService {
     }
 
     public List<String> getCategories(){
-        List<String> list = categoryList.getListOfCategory();
+		List<String> list = categoryList.getListOfCategory();
         return list;
     }
 

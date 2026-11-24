@@ -128,7 +128,7 @@ public class ContentService {
 		Map<Category, List<Contents>> categoryGroup = listOfContents.stream().collect(Collectors.groupingBy(Contents::getCategory));
 		Map<String,Integer> count=new HashMap<String,Integer>();
 		for(String str:listOfCategories) {
-			listOfCategories.stream().filter(listOfCategories.contains(str));
+			//listOfCategories.stream().filter(listOfCategories.contains(str));
 		}
 		
 		return 	categoryGroup;    

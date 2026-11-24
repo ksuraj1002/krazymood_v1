@@ -34,7 +34,14 @@ public class ContentDao{
     }
 
     public List<Contents> findMostViewedContents() {
-        String sql="SELECT C FROM Contents C GROUP BY C.subCategory.subCatName ORDER BY C.views DESC";
+        String sql="SELECT c\r\n"
+        		+ "FROM Contents c\r\n"
+        		+ "WHERE c.id = (\r\n"
+        		+ "    SELECT MAX(c2.id)\r\n"
+        		+ "    FROM Contents c2\r\n"
+        		+ "    WHERE c2.subCategory.subCatName = c.subCategory.subCatName\r\n"
+        		+ ")\r\n"
+        		+ "ORDER BY c.views DESC";
         List<Contents> mostViewed = entityManager.createQuery(sql,Contents.class).getResultList();
         return mostViewed;
     }
@@ -51,9 +58,25 @@ public class ContentDao{
     public List<Contents> getContentsByPageNumberAndCategoriesNotEqualTo(String category, int offset, int limit, boolean isCategory) {
         String sql=null;
         if(isCategory){
-            sql="SELECT C FROM Contents C WHERE C.category.title!='"+category+"' GROUP BY C.category.title ORDER BY C.views DESC";
+            sql="SELECT C\r\n"
+            		+ "FROM Contents C\r\n"
+            		+ "WHERE C.category.title!='"+category+"'\r\n"
+            		+ "AND C.views = (\r\n"
+            		+ "    SELECT MAX(C2.views)\r\n"
+            		+ "    FROM Contents C2\r\n"
+            		+ "    WHERE C2.category.title = C.category.title\r\n"
+            		+ ")\r\n"
+            		+ "ORDER BY C.views DESC";
         }else{
-            sql="SELECT C FROM Contents C WHERE  C.subCategory.subCatName!='"+category+"' GROUP BY C.subCategory.subCatName ORDER BY C.views DESC";
+            sql="SELECT C\r\n"
+            		+ "FROM Contents C\r\n"
+            		+ "WHERE C.subCategory.subCatName!='"+category+"'\r\n"
+            		+ "AND C.views = (\r\n"
+            		+ "    SELECT MAX(C2.views)\r\n"
+            		+ "    FROM Contents C2\r\n"
+            		+ "    WHERE C2.subCategory.subCatName = C.subCategory.subCatName\r\n"
+            		+ ")\r\n"
+            		+ "ORDER BY C.views DESC";
         }
         return entityManager.createQuery(sql,Contents.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }

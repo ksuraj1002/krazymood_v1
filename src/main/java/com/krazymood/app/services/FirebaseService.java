@@ -40,7 +40,7 @@ public class FirebaseService {
         System.err.print("Initializing FireBase ...............");
         FileInputStream serviceAccount = null;
         try {
-            serviceAccount = new FileInputStream(uploadLocation+"krazymood-22d16-firebase-adminsdk-6n0ed-b03b696e49.json");
+            serviceAccount = new FileInputStream(uploadLocation+"krazymood-22d16-firebase-adminsdk-6n0ed-cda93572c1.json");
 
             firebaseOptions = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
